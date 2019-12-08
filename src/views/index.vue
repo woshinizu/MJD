@@ -6,31 +6,31 @@
     <nav class="navBox">
       <div>
         <router-link to="/index/home" >
-          <i class="iconfont icon-11"></i>
+          <van-icon name="wap-home-o" />
           <div>首页</div>
         </router-link>
       </div>
       <div>
         <router-link to="/index/classification">
-          <i class="iconfont icon-huiyuan-"></i>
+          <van-icon name="weapp-nav" />
           <div>分类</div>
         </router-link>
       </div>
       <div class="fountBox">
         <router-link to="/index/found">
-          <van-icon name="search" />
+          <van-icon class="i" name="search" />
           <div>发现</div>
         </router-link>
       </div>
       <div>
         <router-link to="/index/shopping-cart" >
-          <i class="iconfont icon-tongzhi"></i>
+          <van-icon name="shopping-cart-o" />
           <div>购物车</div>
         </router-link>
       </div>
       <div>
         <router-link to="/index/login">
-          <i class="iconfont icon-icon-user"></i>
+          <van-icon name="manager" />
           <div>我的</div>
         </router-link>
       </div>
@@ -68,6 +68,7 @@ nav{
   display: flex;
   align-items: center;
   background:#fff;
+  box-shadow:0px 0px 9px -1px #ccc;
   > div {
     flex: 1;
     text-align: center;
@@ -77,7 +78,7 @@ nav{
       display: block;
       width: 100%;
       height: 100%;
-      i {
+      i{
         
         font-size: 7vw;
         font-weight: 800;

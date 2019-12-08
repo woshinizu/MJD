@@ -1,6 +1,6 @@
 <template>
     <div id="main">
-      <router-link to="/index">
+      <router-link to="/index/home">
         <router-view></router-view>
       </router-link> 
     </div>
