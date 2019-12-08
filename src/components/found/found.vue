@@ -1,6 +1,9 @@
 <template>
     <div>
-        adssadasda
+        发现
+        <div style=:width:800px;height:800px;>
+            <van-icon name="like-o" />
+        </div>
     </div>
 </template>
 <script>
