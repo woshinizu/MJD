@@ -71,7 +71,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style lang="less" >
 .imageBox {
   position: absolute;
   top: 116vw;

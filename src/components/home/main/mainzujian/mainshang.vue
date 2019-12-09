@@ -99,7 +99,7 @@ export default {
   components: {}
 };
 </script>
-<style lang="less">
+<style lang="less" >
 .reliveBox {
   width: 45vw;
   background: #fff;

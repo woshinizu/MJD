@@ -18,24 +18,33 @@
         </van-search>
       </div>
     </div>
-    <div class="">
-
+    <div class="shopBox">
+        <div v-if='flag'>
+            <shops></shops>
+        </div>
+         <div v-else>
+             <noshops></noshops>
+         </div>
     </div>
   </div>
 </template>
 <script>
 // @ is an alias to /src
+import shops from '@/components/home/header/searchfen/shops.vue'
+import noshops from '@/components/home/header/searchfen/noshops.vue'
 export default {
   name: "searchList",
   data() {
     return {
         value:this.$route.query.keywords,
+        flag:true
     };
   },
   created() {
       console.log(this.$route)
   },
   components: {
+      shops,noshops
       
   },
   methods: {
@@ -57,5 +66,11 @@ export default {
       width: 75vw;
     }
   }
+}
+.shopBox{
+    position: absolute;
+    background: rgb(209, 209, 209,0.1);
+    height: 100%;
+    
 }
 </style>

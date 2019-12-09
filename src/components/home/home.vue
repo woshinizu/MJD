@@ -117,7 +117,7 @@ export default {
   methods: {}
 };
 </script>
-<style lang="less" scoped>
+<style lang="less" >
 //scoped 当前样式 只对当前模板 起作用
 .shang-headerBox {
   .fountBox {

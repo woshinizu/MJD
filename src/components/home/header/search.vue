@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       value: '',
-      ary: localStorage.getItem('set').split(','),
+      ary: localStorage.getItem('set') ? localStorage.getItem('set').split(',') : [],
     };
   },
   components: {
@@ -53,6 +53,7 @@ export default {
   methods: {
     onSearch() {},
     add() {
+      console.log(this.ary)
       this.ary.push(this.value)
     //   this.ary = this.value;
       localStorage.setItem('set',this.ary.join(","))
