@@ -4,7 +4,7 @@
       <div class="imgbox"></div>
       <van-field
         left-icon="contact"
-        v-model="value"
+        v-model="username"
         placeholder="请输入用户名"
         input-align="left"
         style="width:80vw;margin:10vw auto"
@@ -14,21 +14,23 @@
         left-icon="edit"
         v-model="password"
         type="password"
-        clickable="true"
         placeholder="请输入密码"
         input-align="left"
         :autofocus="true"
         style="width:80vw;margin:6vw auto;"
-        @click-right-icon="$toast('question')"
       />
-
-      <van-button type="warning" style="width:80vw;margin:10vw auto;display:block" round="true">登录</van-button>
-
-            <router-link class="ra" to="/sign">新用户注册</router-link>
-      <div>
+      <!-- <router-link to="/index/home" style="color:white"> -->
+      <div @click="submit">
+        <van-button
+          type="warning"
+          style="width:80vw;margin:10vw auto;display:block"
+          :round="true"
+        >登录</van-button>
       </div>
+      <!-- </router-link> -->
+      <router-link class="ra" to="/sign">新用户注册</router-link>
+      <div></div>
     </van-cell-group>
-    <!-- <input type="text" placeholder="请输入内容"> -->
   </div>
 </template>
 <script>
@@ -37,6 +39,8 @@ import vant from "vant";
 import { Field } from "vant";
 import { Icon } from "vant";
 import Vue from "vue";
+import { Dialog } from "vant";
+import axios from "axios";
 // import sign from "@/router/sign/sign.js"
 Vue.use(Field);
 Vue.use(Icon);
@@ -45,11 +49,47 @@ export default {
   name: "login",
   data() {
     return {
-      value: "",
+      username: "",
       password: ""
     };
   },
-  components: {}
+  components: {},
+  methods: {
+    submit() {
+      let username = this.username;
+      let password = this.password;
+      if (!username || !password) {
+        // alert("用户名密码不能为空");
+        Dialog.alert({
+          title: "⚠️警告",
+          message: "用户名或密码不能为空"
+        }).then(() => {
+          // on close
+          this.$router.push('./login');
+        });
+      } else {
+        // 输入用户名密码，与后台给的数据做对比，如果一致那么就返回code 0 登录成功
+        axios
+          .post("/login", { username, password })
+          .then(data => {
+            if (data.data.code == 0) {
+              this.$router.push("/index/home");
+            } else {
+              Dialog.alert({
+                title: "⚠️警告",
+                message: "用户名或密码错误"
+              }).then(() => {
+                // on close
+                this.$router.push("/login");
+              });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
@@ -58,18 +98,18 @@ export default {
   padding: 0;
   list-style: none;
 }
-.imgbox{
-width: 30vw;
-height: 30vw;
-margin: 15vw auto;
-border-radius: 50%;
-background-image: url('https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3633190512,1207269899&fm=26&gp=0.jpg');
-background-size: cover;
+.imgbox {
+  width: 30vw;
+  height: 30vw;
+  margin: 15vw auto;
+  border-radius: 50%;
+  background-image: url("https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3633190512,1207269899&fm=26&gp=0.jpg");
+  background-size: cover;
 
->img{
-width: 100%;
-height: 100%;
-}
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 }
 .ra {
   color: rgba(0, 0, 0, 0.4);
