@@ -42,7 +42,6 @@ export default {
     },
     computed:{
         specs(){
-            console.log(this.skuInfo);
             let name = Object.keys(this.skuInfo.item);
             let ary =[];
             name.forEach(v => {

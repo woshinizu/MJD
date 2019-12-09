@@ -1,16 +1,12 @@
 <template>
     <div class="item_Box">
-         <van-radio-group v-model="data.shopId">
-            <van-radio @click="change(data.shopId,!data.allSelect)" :name="data.allSelect ? data.shopId : ''" checked-color="#FD2607">{{data.name}}</van-radio>
-            <template v-for="(item,index) in data.joincart" >
-                <van-radio-group v-model="item.id" class="radio_Box" :key="index">
-                    <van-radio :name="item.isSelect ? item.id : ''" checked-color="#FD2607">
+            <van-checkbox @click.self="change(!spuInfo.allSelect)" v-model="spuInfo.allSelect" checked-color="#FD2607">{{spuInfo.name}}</van-checkbox>
+            <template v-for="(item,index) in spuInfo.joincart" >
+                    <van-checkbox @click="changItem" v-model="item.isSelect" checked-color="#FD2607" :key="item.id">
                         <sku-item :skuInfo="item"></sku-item>
-                    </van-radio>
-                </van-radio-group>
-                <van-divider :key="index" v-if=" index != data.joincart.length-1" />
+                    </van-checkbox>
+                <van-divider :key="index" v-if=" index != spuInfo.joincart.length-1" />
             </template>
-        </van-radio-group>
     </div>
 </template>
 <script>
@@ -18,17 +14,18 @@
 import skuItem from '@/components/shopping-cart/item-sku';
 export default {
     name: 'shoppingItem',
-    props: ['data'],
+    props: ['spuInfo'],
     data() {
         return {
-            radio: "1",
+            checked:1,
+            itemRadio: 1,
             show: false,
             // ary: [1,2,3]
         
         }
     },
     created(){
-        console.log(this.data);
+        console.log(this.spuInfo);
     },
     computed:{
         allSelect:{
@@ -45,11 +42,15 @@ export default {
          showPopup() {
             this.show = true;
         },
-        change(id,select){
-            console.log(2222222222);
-            this.$emit('shopSelect',id,select);
+        change(select){
+            console.log(11);
+            this.$emit('shopSelect',this.spuInfo.shopId,select);
+        },
+        changItem(){
+            this.itemRadio = this.itemRadio ? 0 : 1;
+            console.log(4444444);
         }
-    }
+    },
 }
 </script>
 <style lang="less" scoped>

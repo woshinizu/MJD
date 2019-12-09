@@ -5,7 +5,7 @@
             <div class="edit_title">编辑</div>
         </header>
         <main v-for="item in ary" :key="item.shopId">
-            <shopping-item @shopSelect="shopSelect" :data="item"></shopping-item>
+            <shopping-item v-model="ary" @shopSelect="shopSelect" :spuInfo="item"></shopping-item>
         </main>
         <div class="total">
             <total :totalPrice="totalPrice" :all="all"></total>
@@ -97,14 +97,14 @@ export default {
             },0);
         }
     },
+    craeted(){
+    },
     components: {
         'shopping-item': shoppingItem,
         total,
     },
     methods:{
         shopSelect(id,select){
-            console.log(3333333);
-            console.log(id);
             if(id){
                 let i = '';
                 let newAry = this.ary.filter((item,index) => {
@@ -119,6 +119,9 @@ export default {
                 console.log(11111111111);
                 console.log(this.ary);
             }
+        },
+        itemSelect(){
+
         }
     }
 
