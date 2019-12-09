@@ -5,7 +5,7 @@
     </div>
     <nav class="navBox">
       <div>
-        <router-link to="/home" >
+        <router-link to="/home">
           <i class="iconfont icon-11"></i>
           <div>首页</div>
         </router-link>
@@ -38,24 +38,23 @@
 export default {
   data() {
     return {
-      flag:false,
+      flag: false,
+      loginState:false
     };
   },
-  components: {
-  },
-  computed: {
-  },
+  components: {},
+  computed: {},
   methods: {
-
-  },
+    show() {}
+  }
 };
 </script>
 <style lang="less" scoped>
 //scoped 当前样式 只对当前模板 起作用
-.mainPage>div:nth-child(1){
-  padding-bottom: 18vw
+.mainPage > div:nth-child(1) {
+  padding-bottom: 18vw;
 }
-nav{
+nav {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -64,7 +63,7 @@ nav{
   border-top: 1px solid #eee;
   display: flex;
   align-items: center;
-  background:#fff;
+  background: #fff;
   > div {
     flex: 1;
     text-align: center;
@@ -86,8 +85,8 @@ nav{
       font-size: 12vw;
       color: rgb(0, 0, 0);
     }
-    a.router-link-active{
-        color: rgb(0, 153, 255);
+    a.router-link-active {
+      color: rgb(0, 153, 255);
     }
   }
 }
