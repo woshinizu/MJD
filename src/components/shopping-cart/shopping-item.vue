@@ -1,10 +1,10 @@
 <template>
     <div class="item_Box">
-         <van-radio-group v-model="radio">
-            <van-radio name="1" checked-color="#FD2607">{{data.name}}</van-radio>
+         <van-radio-group v-model="data.shopId">
+            <van-radio @click="change(data.shopId,!data.allSelect)" :name="data.allSelect ? data.shopId : ''" checked-color="#FD2607">{{data.name}}</van-radio>
             <template v-for="(item,index) in data.joincart" >
-                <van-radio-group v-model="radio" class="radio_Box" :key="index">
-                    <van-radio name="1" checked-color="#FD2607">
+                <van-radio-group v-model="item.id" class="radio_Box" :key="index">
+                    <van-radio :name="item.isSelect ? item.id : ''" checked-color="#FD2607">
                         <sku-item :skuInfo="item"></sku-item>
                     </van-radio>
                 </van-radio-group>
@@ -27,12 +27,27 @@ export default {
         
         }
     },
+    created(){
+        console.log(this.data);
+    },
+    computed:{
+        allSelect:{
+            get(){
+                return 
+            },
+            set(){}
+        }
+    },
     components: {
         'sku-item': skuItem,
     },
     methods:{
          showPopup() {
             this.show = true;
+        },
+        change(id,select){
+            console.log(2222222222);
+            this.$emit('shopSelect',id,select);
         }
     }
 }
