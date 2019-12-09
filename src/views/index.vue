@@ -6,13 +6,14 @@
     <nav class="navBox">
       <div>
         <router-link to="/index/home" >
-          <i class="iconfont icon-11"></i>
+        <van-icon name="wap-home-o" />
           <div>首页</div>
         </router-link>
       </div>
+      
       <div>
         <router-link to="/index/classification">
-          <i class="iconfont icon-huiyuan-"></i>
+          <van-icon name="cluster-o" />
           <div>分类</div>
         </router-link>
       </div>
@@ -24,13 +25,13 @@
       </div>
       <div>
         <router-link to="/index/shopping-cart" >
-          <i class="iconfont icon-tongzhi"></i>
+          <van-icon name="shopping-cart-o" />
           <div>购物车</div>
         </router-link>
       </div>
       <div>
-        <router-link to="/index/login">
-          <i class="iconfont icon-icon-user"></i>
+        <router-link to="/index/my">
+          <van-icon name="user-o" />
           <div>我的</div>
         </router-link>
       </div>
@@ -38,6 +39,7 @@
   </div>
 </template>
 <script>
+import {icon} from "vant"
 export default {
   data() {
     return {
