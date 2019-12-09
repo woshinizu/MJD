@@ -2,10 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { Search,Button,Icon,Tab, Tabs,TreeSelect } from 'vant';
+import { Search,Button,Icon,Tab, Tabs,TreeSelect,Grid, GridItem   } from 'vant';
 import '@/less/commen.less' // 引入公用样式
 Vue.use(Search)
-Vue.use(Button).use(Icon).use(Tab).use(Tabs).use(TreeSelect)
+Vue.use(Button).use(Icon).use(Tab).use(Tabs).use(TreeSelect).use(Grid ).use(GridItem)
 
 Vue.config.productionTip = false
 
