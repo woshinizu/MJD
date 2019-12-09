@@ -10,6 +10,8 @@ import classification from './classification/classification'
 import my from './my/my'
 // import login from './my/my'
 import shoppingcart from './shoppingcart/shopping-cart'
+import Search from '@/components/home/header/search.vue'
+import SearchList from '@/components/home/header/searchList.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +38,16 @@ const routes = [
     name: 'setting',
     component: setting
   },
+  {
+    path:'/search',
+    name:'search',
+    component:Search,
+  },
+  {
+    path:'/searchList',
+    name:'searchList',
+    component:SearchList
+  }
 ]
 
 const router = new VueRouter({
