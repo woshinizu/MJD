@@ -59,7 +59,7 @@ export default {
       localStorage.setItem('set',this.ary.join(","))
       this.$router.push({
         path:'/searchList',
-        query:{keywords:this.value}
+        query:{keywords:this.value,flag:'true',left:'true'}
       })
     },
     onSearchAdd(i){
