@@ -44,7 +44,7 @@ export default {
   data() {
     return {
       value: '',
-      ary: localStorage.getItem('set').split(','),
+      ary: localStorage.getItem('set') ? localStorage.getItem('set').split(',') : [],
     };
   },
   components: {
