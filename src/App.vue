@@ -1,8 +1,8 @@
 <template>
     <div id="main">
-      <router-link to="">
+      <!-- <router-link to="/index"> -->
         <router-view></router-view>
-      </router-link> 
+      <!-- </router-link>  -->
     </div>
 </template>
 
