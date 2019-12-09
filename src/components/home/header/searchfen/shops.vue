@@ -22,7 +22,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 div{
     width: 100%;
 }
