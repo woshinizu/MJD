@@ -6,6 +6,8 @@ import found from './found/found'
 import classification from './classification/classification'
 import login from './login/login'
 import shoppingcart from './shoppingcart/shopping-cart'
+import Search from '@/components/home/header/search.vue'
+import SearchList from '@/components/home/header/searchList.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +19,16 @@ const routes = [
     redirect: '/index/home',
     children:home.concat(found,classification,login,shoppingcart)
   },
+  {
+    path:'/search',
+    name:'search',
+    component:Search,
+  },
+  {
+    path:'/searchList',
+    name:'searchList',
+    component:SearchList
+  }
 ]
 
 const router = new VueRouter({

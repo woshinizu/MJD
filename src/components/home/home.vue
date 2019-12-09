@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- <router-view></router-view> -->
     <div class="mainPage">
       <van-image
         width="100%"
@@ -8,12 +9,14 @@
       />
       <div class="shang-headerBox">
         <div class="fountBox">
-          <van-search
-            background="rgba(0,0,0,0)"
-            shape="round"
-            placeholder="请输入搜索关键词"
-            v-model="value"
-          />
+          <router-link to="/search">
+            <van-search
+              background="rgba(0,0,0,0)"
+              shape="round"
+              placeholder="请输入搜索关键词"
+              v-model="value"
+            />
+          </router-link>
         </div>
       </div>
       <div class="swiprt">
@@ -67,7 +70,7 @@
           </van-swipe-item>
         </van-swipe>
       </div>
-      <div class="tabBox" style="position: fixed;top: 61vw;">
+      <div class="tabBox" style="position: absolute;top: 61vw;">
         <van-tabs v-model="active" swipeable>
           <van-tab v-for="index in 2" :key="index">
             <div
@@ -83,7 +86,7 @@
         </van-tabs>
       </div>
     </div>
-    <my-main></my-main> 
+    <my-main></my-main>
   </div>
 </template>
 <script>
@@ -120,7 +123,7 @@ export default {
   .fountBox {
     width: 90vw;
     border-radius: 15px;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 5vw;
     display: inline-block;
