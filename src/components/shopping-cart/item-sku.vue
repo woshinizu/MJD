@@ -32,9 +32,8 @@ export default {
     name: 'skuItem',
     data() {
         return {
-            radio: "1",
             show: false,
-        
+            value: 0,
         }
     },
     components: {
