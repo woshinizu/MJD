@@ -1,12 +1,10 @@
 import login from '@/components/login/login.vue'
-
 export default [
     {
-        path:'/index/login',
+        path:'/login',
         name:'login',
         component:login,
         children:[
-
         ]
     }
 ]
