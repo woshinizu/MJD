@@ -10,6 +10,7 @@
           <div>首页</div>
         </router-link>
       </div>
+      
       <div>
         <router-link to="/index/classification">
           <van-icon name="weapp-nav" />
@@ -29,8 +30,8 @@
         </router-link>
       </div>
       <div>
-        <router-link to="/index/login">
-          <van-icon name="manager" />
+        <router-link to="/index/my">
+          <van-icon name="user-o" />
           <div>我的</div>
         </router-link>
       </div>
@@ -38,6 +39,7 @@
   </div>
 </template>
 <script>
+import {icon} from "vant"
 export default {
   data() {
     return {

@@ -1,19 +1,20 @@
 <template>
     <div>
-        adsadsadsad
+        <found></found>
     </div>
 </template>
 <script>
 // @ is an alias to /src
+import found from '@/components/found/recommend/recommend.vue'
 export default {
-    name: 'login',
+    name: 'flagshipStore',
     data() {
         return {
         
         }
     },
     components: {
-        
+        found
     }
 }
 </script>

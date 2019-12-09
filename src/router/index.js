@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import index from '../views/index.vue'
+import login from '../views/login.vue'
+import sign from '../views/sign.vue'
+import setting from '../views/setting.vue'
 import home from './home/home'
 import found from './found/found'
 import classification from './classification/classification'
-import login from './login/login'
+import my from './my/my'
+// import login from './my/my'
 import shoppingcart from './shoppingcart/shopping-cart'
+import Search from '@/components/home/header/search.vue'
+import SearchList from '@/components/home/header/searchList.vue'
 
 Vue.use(VueRouter)
 
@@ -15,8 +21,33 @@ const routes = [
     name: 'index',
     component: index,
     redirect: '/index/home',
-    children:home.concat(found,classification,login,shoppingcart)
+    children:home.concat(found,classification,my,shoppingcart)
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: login
+  },
+  {
+    path: '/sign',
+    name: 'sign',
+    component: sign
+  },
+  {
+    path: '/setting',
+    name: 'setting',
+    component: setting
+  },
+  {
+    path:'/search',
+    name:'search',
+    component:Search,
+  },
+  {
+    path:'/searchList',
+    name:'searchList',
+    component:SearchList
+  }
 ]
 
 const router = new VueRouter({
