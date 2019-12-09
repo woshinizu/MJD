@@ -5,12 +5,12 @@
         </div>
         <div>
             <div class="name">
-                华为(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银
+                {{skuInfo.title}}
             </div>
             <div class="sku_line">
                 <van-button class="select_btn" @click="showPopup">
                     <div class="select">
-                        <span>【预售版】MateBook D 14 锐龙版，第三方linux系统</span>
+                        <span>{{specs}}</span>
                         <van-icon class="drop_down" name="arrow-down" />
                     </div>
                 </van-button>
@@ -19,9 +19,9 @@
             <div class="sku_sum">
                 <div class="money">
                     <span class="unit">￥</span>
-                    <span class="num">99999999</span>
+                    <span class="num">{{skuInfo.price * skuInfo.num}}</span>
                 </div>
-                <van-stepper v-model="value" integer />
+                <van-stepper v-model="skuInfo.num" integer />
             </div>
         </div>
     </div>
@@ -30,6 +30,7 @@
 // @ is an alias to /src
 export default {
     name: 'skuItem',
+    props: ['skuInfo'],
     data() {
         return {
             show: false,
@@ -38,6 +39,17 @@ export default {
     },
     components: {
         
+    },
+    computed:{
+        specs(){
+            console.log(this.skuInfo);
+            let name = Object.keys(this.skuInfo.item);
+            let ary =[];
+            name.forEach(v => {
+                ary.push(v + ':' + this.skuInfo.item[v])
+            })
+            return ary.join(',')
+        }
     },
     methods:{
          showPopup() {
@@ -72,7 +84,7 @@ export default {
             .select_btn{
                 width: 50vw;
                 background: #f7f7f7;
-                padding: 0 15px 0 5px;
+                padding: 0 15px 0 10px;
                 height: 20px;
                 line-height: 20px;
                 font-size: 10px;
@@ -80,6 +92,7 @@ export default {
                 border-radius: 50px;
                 .select{
                     display: flex;
+                    justify-content: space-between;
                     >span{
                         overflow: hidden;
                         text-overflow: ellipsis;

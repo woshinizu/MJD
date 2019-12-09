@@ -15,7 +15,8 @@ import {
   Stepper,
   Image,
   Swipe,
-  SwipeItem 
+  SwipeItem,
+  Divider
 } from 'vant';
 import '@/less/commen.less' // 引入公用样式
 Vue.use(Search)
@@ -31,6 +32,7 @@ Vue.use(Search)
   .use(Image)
   .use(Swipe)
   .use(SwipeItem)
+  .use(Divider)
 
 Vue.config.productionTip = false
 
