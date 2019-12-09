@@ -101,29 +101,29 @@
       <van-icon name="like" color="tomato" size="0.8em" />
     </div>
     <ul class="lk">
-      <li>
+      <li v-for="item in ary">
          <div class="lt">
           <div> 
             <img
-              src="https://m.360buyimg.com/babel/s350x350_jfs/t1/54944/25/5319/145292/5d2ee0f4Edc726a86/88da314960c9583a.jpg!q70.dpg"
+              :src="item[0].pic"
               alt
             />
           </div>
           <p>
-            <span>自营</span>音响音响音响
-            <span style="color:tomato;background:none;padding-top:2vw">￥2990</span>
+            <span>{{item[0].classify}}</span>{{item[0].desc}}
+            <span style="color:tomato;background:none;padding-top:2vw">￥{{item[0].price}}</span>
           </p>
         </div>
         <div class="rt">
           <div>
             <img
-              src="https://img14.360buyimg.com/mobilecms/s372x372_jfs/t1/14949/9/4241/112484/5c304b10Ee04ada5f/c4bf4e75be0bc172.jpg!q70.dpg.webp"
+              :src="item[1].pic"
               alt
             />
           </div>
           <p>
-            <span>自营</span>手表手表手表
-            <span style="color:tomato;background:none;padding-top:2vw">￥2990</span>
+            <span>{{item[1].classify}}</span>{{item[1].desc}}
+            <span style="color:tomato;background:none;padding-top:2vw">￥{{item[0].price}}</span>
           </p>
         </div>
       </li>
@@ -167,15 +167,23 @@ export default {
   name: "my",
   data() {
     return {
-      //   fileList: [
-      //     { url: "https://img.yzcdn.cn/vant/leaf.jpg" },
-      //     // Uploader 根据文件后缀来判断是否为图片文件
-      //     // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
-      //     { url: "https://cloud-image", isImage: true }
-      //   ]
+   
+      ary:[]
     };
   },
   components: {},
+  created() {
+    fetch('/index/my').then(Response=>{
+      // console.log(data)
+      // this.ary=data;
+      // console.log(this.ary)
+     return Response.json()
+    }).then(data=>{
+      console.log(data)
+      this.ary = data.data;
+      console.log(this.ary)
+    })
+  },
   methods: {
     // afterRead(file) {
     //   // 此时可以自行将文件上传至服务器

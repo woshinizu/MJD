@@ -4,7 +4,7 @@
       <div class="imgbox"></div>
       <van-field
         left-icon="contact"
-        v-model="value"
+        v-model="username"
         placeholder="请输入用户名"
         input-align="left"
         style="width:80vw;margin:10vw auto"
@@ -14,21 +14,21 @@
         left-icon="edit"
         v-model="password"
         type="password"
-        clickable="true"
+        :clickable="true"
         placeholder="请输入密码"
         input-align="left"
         :autofocus="true"
         style="width:80vw;margin:6vw auto;"
         @click-right-icon="$toast('question')"
       />
-
-      <van-button type="warning" style="width:80vw;margin:10vw auto;display:block" round="true">注册</van-button>
-      
+      <div @click="signIn">
+        <van-button type="warning" style="width:80vw;margin:10vw auto;display:block" :round="true">注册</van-button>
+      </div>
     </van-cell-group>
-     <p>
-        遇到问题？您可以
-        <a href="tel:18322580483">联系客服</a>
-      </p>
+    <p>
+      遇到问题？您可以
+      <a href="tel:18322580483">联系客服</a>
+    </p>
   </div>
 </template>
 <script>
@@ -37,6 +37,8 @@ import vant from "vant";
 import { Field } from "vant";
 import { Icon } from "vant";
 import Vue from "vue";
+import axios from "axios";
+import { Dialog } from "vant";
 // import sign from "@/router/sign/sign.js"
 Vue.use(Field);
 Vue.use(Icon);
@@ -45,11 +47,30 @@ export default {
   name: "sign",
   data() {
     return {
-      value: "",
+      username: "",
       password: ""
     };
   },
-  components: {}
+  components: {},
+  methods: {
+    signIn() {
+      let username = this.username;
+      let password = this.password;
+      if (!username || !password) {
+        Dialog.alert({
+          title: "⚠️警告",
+          message: "用户名或密码不能为空"
+        }).then(() => {
+          // on close
+          this.$router.push('/sign');
+        });
+      } else {
+        axios.post("/sign", { username, password }).then(data => {
+          console.log('注册成功',data)
+        });
+      }
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
@@ -79,9 +100,9 @@ export default {
   cursor: pointer;
 }
 p {
-    position: absolute;
-    left: 30vw;
-    top: 109vw;
+  position: absolute;
+  left: 30vw;
+  top: 109vw;
   font-size: 0.14em;
   color: #909399;
 }

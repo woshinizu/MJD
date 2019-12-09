@@ -65,7 +65,7 @@ nav{
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 18vw;
+  height: 9vh;
   border-top: 1px solid #eee;
   display: flex;
   align-items: center;
