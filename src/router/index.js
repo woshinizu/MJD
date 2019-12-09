@@ -12,6 +12,8 @@ import my from './my/my'
 import shoppingcart from './shoppingcart/shopping-cart'
 import details from '@/components/commonComponents/details.vue'
 
+import Search from '@/components/home/header/search.vue'
+import SearchList from '@/components/home/header/searchList.vue'
 
 Vue.use(VueRouter)
 
@@ -43,7 +45,16 @@ const routes = [
     name:'details',
     component:details,
 
-}
+},{
+    path:'/search',
+    name:'search',
+    component:Search,
+  },
+  {
+    path:'/searchList',
+    name:'searchList',
+    component:SearchList
+  }
 ]
 
 const router = new VueRouter({

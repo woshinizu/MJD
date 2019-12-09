@@ -6,20 +6,20 @@
     <nav class="navBox">
       <div>
         <router-link to="/index/home" >
-        <van-icon name="wap-home-o" />
+          <van-icon name="wap-home-o" />
           <div>首页</div>
         </router-link>
       </div>
       
       <div>
         <router-link to="/index/classification">
-          <van-icon name="cluster-o" />
+          <van-icon name="weapp-nav" />
           <div>分类</div>
         </router-link>
       </div>
       <div class="fountBox">
         <router-link to="/index/found">
-          <van-icon name="search" />
+          <van-icon class="i" name="search" />
           <div>发现</div>
         </router-link>
       </div>
@@ -65,11 +65,12 @@ nav{
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 18vw;
+  height: 9vh;
   border-top: 1px solid #eee;
   display: flex;
   align-items: center;
   background:#fff;
+  box-shadow:0px 0px 9px -1px #ccc;
   > div {
     flex: 1;
     text-align: center;
@@ -79,7 +80,7 @@ nav{
       display: block;
       width: 100%;
       height: 100%;
-      i {
+      i{
         
         font-size: 7vw;
         font-weight: 800;
