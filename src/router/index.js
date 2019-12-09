@@ -10,6 +10,8 @@ import classification from './classification/classification'
 import my from './my/my'
 // import login from './my/my'
 import shoppingcart from './shoppingcart/shopping-cart'
+import details from '@/components/commonComponents/details.vue'
+
 
 Vue.use(VueRouter)
 
@@ -36,6 +38,12 @@ const routes = [
     name: 'setting',
     component: setting
   },
+  {
+    path:'/details',
+    name:'details',
+    component:details,
+
+}
 ]
 
 const router = new VueRouter({
