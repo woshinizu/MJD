@@ -1,0 +1,20 @@
+[
+    {
+        "keywords":"dianbu",
+        "src":"../image/diannao",
+        "flag":"true",
+        "left":"true"
+    },
+    {
+        "keywords":"dianbu2",
+        "src":"../image/diannao2",
+        "flag":"true",
+        "left":"false"
+    },
+    {
+        "keywords":"",
+        "src":"../image/diannao2",
+        "flag":"false",
+        "left":"false"
+    }
+]
