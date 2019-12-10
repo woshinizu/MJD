@@ -19,7 +19,7 @@
             <div class="sku_sum">
                 <div class="money">
                     <span class="unit">￥</span>
-                    <span class="num">{{(skuInfo.price * skuInfo.num).toFixed(2)}}</span>
+                    <span class="num">{{skuInfo.price.toFixed(2)}}</span>
                 </div>
                 <van-stepper v-model="skuInfo.num" integer />
             </div>

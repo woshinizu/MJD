@@ -42,9 +42,9 @@
         <div class="select">
             <h3>已选</h3>
             <div>
-                选择的类型
+                {{selectCt ? selectCt : '选择的类型'}}
             </div>
-            <van-icon name="ellipsis" class="dian"/>
+            <van-icon name="ellipsis" @click="onEditIcon" class="dian"/>
         </div>
         <div class="imgBox">
             <img src="https://m.360buyimg.com/babel/jfs/t1/101001/39/5346/238638/5dedabb8Ef016a1cb/87d02d8442699f3e.jpg!q70.dpg">
@@ -56,19 +56,24 @@
             <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
             <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon" />
             <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
-            <van-goods-action-button type="danger" text="立即购买" @click="onClickButton" />
+            <van-goods-action-button type="danger" text="立即购买" @click="onClickBuyButton" />
             </van-goods-action>
       </div>
-
+      <sku-list :show="show" @goodsId="goodsId" :type="type" @changeShow="changeShow"></sku-list>
     </div>
 </template>
 <script>
 // @ is an alias to /src
+import skuList from '@/components/commonComponents/skuList.vue'
 export default {
-    name: 'details',
+    name: 'details1',
     data() {
     return {
-      current: 0
+      current: 0,
+      show: false,
+      goodsId: 2259,
+      type: 'add',
+      selectCt: '',
     }
     },
     methods: {
@@ -76,12 +81,28 @@ export default {
         this.current = index;
         },
         onClickIcon() {
-        Toast('点击图标');
+            this.$router.push('/index/shopping-cart')
         },
-        onClickButton() {
-        Toast('点击按钮');
-        }
-  }
+        onClickBuyButton() {
+            this.show = true;
+            this.type = 'buy'; 
+        },
+        onClickButton(){
+            this.show = true;
+            this.type = 'add';
+        },
+        changeShow(selectCt){
+            this.selectCt = selectCt;
+            this.show = !this.show;
+        },
+        onEditIcon() {
+            this.show = true;
+            this.type = 'edit';
+        },
+    },
+    components:{
+        'sku-list':skuList,
+    }
     }
 
 </script>
