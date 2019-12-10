@@ -89,7 +89,9 @@
             </ul>
         </div>
       </div>
-      
+      <div class="pic">
+          <img src="https://img30.360buyimg.com/sku/jfs/t1/36741/20/3750/303100/5cb970f7E8d4360c0/300ebf1adf30579f.jpg">
+      </div>
       <div>
           <van-goods-action>
     <van-goods-action-icon icon="cart-o" text="购物车" info="5" />
@@ -292,5 +294,9 @@ export default {
     right: 29px;
     transform: rotate(-90deg);
     color: rgba(0,0,0,0.5);
+}
+.pic{
+    width: 92vw;
+    margin: 0 4vw;
 }
 </style>
