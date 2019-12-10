@@ -13,7 +13,8 @@
     },
     {
         "username": "尚帅",
-        "password": "123456"
+        "password": "123456",
+        "payPassword":""
     },
     {
         "username": "杨洋",

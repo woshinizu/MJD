@@ -4,6 +4,7 @@ import index from '../views/index.vue'
 import login from '../views/login.vue'
 import sign from '../views/sign.vue'
 import setting from '../views/setting.vue'
+// import Password from './my/se'nnguyjhbmn
 import home from './home/home'
 import found from './found/found'
 import classification from './classification/classification'
@@ -18,6 +19,8 @@ import placeOrder from '@/components/placeOrder/placeOrder.vue'
 
 import Search from '@/components/home/header/search.vue'
 import SearchList from '@/components/home/header/searchList.vue'
+
+import setPassword from '@/views/Password/setPassword.vue'
 
 Vue.use(VueRouter)
 
@@ -42,7 +45,7 @@ const routes = [
   {
     path: '/setting',
     name: 'setting',
-    component: setting
+    component: setting,
   },
   {
     path:'/details',
@@ -78,6 +81,11 @@ const routes = [
     path:'/placeOrder',
     name:'placeOrder',
     component:placeOrder,
+  },
+  {
+    path:'/setPassword',
+    name:'setPassword',
+    component:setPassword,
   }
 ]
 

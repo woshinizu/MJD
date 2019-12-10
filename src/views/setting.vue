@@ -40,7 +40,7 @@
       </div>
       <div class="pay">
         <span>
-          <router-link to="/pay">支付设置</router-link>
+          <router-link to="/setPassword">支付设置</router-link>
         </span>
         <div class="icon">
           <van-icon name="arrow" color="#909399" />
