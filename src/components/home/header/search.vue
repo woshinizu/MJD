@@ -2,7 +2,7 @@
   <div>
     <div class="searchBox">
       <router-link to="/index/home">
-        <div class="jump" >
+        <div class="jump">
           <van-icon name="arrow-left" />
         </div>
       </router-link>
@@ -16,19 +16,16 @@
           @search="onSearch"
         >
           <div slot="action" @click="add">搜索</div>
-
-        
         </van-search>
-        
       </div>
     </div>
     <div>
       <div class="hotBoxSh">
         <div class="topSearch">最近搜索</div>
-        <van-icon @click="clear"  class="rt" name="delete" />
+        <van-icon @click="clear" class="rt" name="delete" />
       </div>
       <div class="hotBoxX">
-        <div v-for="(i,index) in ary" :key="index" @click='onSearchAdd(i)'>
+        <div v-for="(i,index) in ary" :key="index" @click="onSearchAdd(i)">
           <span>{{i}}</span>
         </div>
       </div>
@@ -38,13 +35,18 @@
 <script>
 // @ is an alias to /src
 // import hot from "@/components/home/header/hot.vue";
-import { searchList } from '@/api/index.js'
+import axios from "axios";
+import http from "@/api/http.js";
+import { searchList } from "@/api/index.js";
+import { readFile } from "@/APIafter/promiseFs.js";
 export default {
   name: "search",
   data() {
     return {
-      value: '',
-      ary: localStorage.getItem('set') ? localStorage.getItem('set').split(',') : [],
+      value: "",
+      ary: localStorage.getItem("set")
+        ? localStorage.getItem("set").split(",")
+        : []
     };
   },
   components: {
@@ -53,23 +55,57 @@ export default {
   methods: {
     onSearch() {},
     add() {
-      console.log(this.ary)
-      this.ary.push(this.value)
-    //   this.ary = this.value;
-      localStorage.setItem('set',this.ary.join(","))
-      this.$router.push({
-        path:'/searchList',
-        query:{keywords:this.value}
-      })
+      console.log(this.ary);
+      this.ary.push(this.value);
+      //   this.ary = this.value;
+      localStorage.setItem("set", this.ary.join(","));
+      http.get("/home/searchList").then(data => {
+        console.log(data.datashang[0].keywords);
+        if (
+          this.value == data.datashang[0].keywords ||
+          data.datashang[1].keywords
+        ) {
+          if (this.value == data.datashang[0].keywords) {
+            this.$router.push({
+              path: "/searchList",
+              query: {
+                keywords: data.datashang[0].keywords,
+                flag: data.datashang[0].flag,
+                left: data.datashang[0].left
+              }
+            });
+          } else if(this.value == data.datashang[1].keywords){
+            this.$router.push({
+              path: "/searchList",
+              query: {
+                keywords: data.datashang[1].keywords,
+                flag: data.datashang[1].flag,
+                left: data.datashang[1].left
+              }
+            });
+          }else{
+            this.$router.push({
+              path: "/searchList",
+              query: {
+                keywords: data.datashang[2].keywords = this.value,
+                flag: data.datashang[2].flag,
+                left: data.datashang[2].left
+              }
+            });
+          }
+        } else {
+          console.log(123);
+        }
+      });
     },
-    onSearchAdd(i){
-        searchList({keywords:i}).then(data=>{
-            this.data = data
-        })
+    onSearchAdd(i) {
+      searchList({ keywords: i }).then(data => {
+        this.data = data;
+      });
     },
-    clear(){
-        localStorage.removeItem('set')
-        this.ary = []
+    clear() {
+      localStorage.removeItem("set");
+      this.ary = [];
     }
   }
 };
@@ -88,7 +124,6 @@ export default {
       width: 75vw;
     }
   }
-
 }
 .hotBoxSh {
   margin-top: 3vw;
