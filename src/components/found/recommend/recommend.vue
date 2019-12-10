@@ -12,12 +12,15 @@
           </div>
           <div class="text">
             <ul @touchScroll="changeA">
+              <router-link to="/details">
               <li class="txBox lt">
                 <img src="../../../assets/logo.png" />
                 <p class="p1">膜法世家膜法世家膜法世家</p>
                 <p class="p2">￥199</p>
                 <p class="p3">￥299</p>
               </li>
+              </router-link>
+              
               <li class="txBox lt">
                 <img src="../../../assets/logo.png" />
                 <p class="p1">膜法世家膜法世家膜法世家</p>
@@ -98,18 +101,21 @@ export default {
           margin: 10px;
         }
       }
+
+      
       .text {
         width: 92vw;
         height: 45vw;
-        overflow: hidden;
+        // overflow: hidden;
         ul {
-          width: 1000vw;
+          width: 100%;
           height: 50vw;
-          overflow: hidden;
+          overflow: scroll;
+          display:flex;
           .txBox {
             width: 35vw;
             height: 45vw;
-
+            float:left;
             img {
               width: 30vw;
               height: 25vw;

@@ -1,6 +1,12 @@
 <template>
   <div>
     <van-cell-group>
+      <router-link to="">
+      <div class="ico" @click="back">
+        <van-icon name="arrow-left" />
+      </div>
+      </router-link>
+
       <div class="imgbox"></div>
       <van-field
         left-icon="contact"
@@ -22,7 +28,11 @@
         @click-right-icon="$toast('question')"
       />
       <div @click="signIn">
-        <van-button type="warning" style="width:80vw;margin:10vw auto;display:block" :round="true">注册</van-button>
+        <van-button
+          type="warning"
+          style="width:80vw;margin:10vw auto;display:block"
+          :round="true"
+        >注册</van-button>
       </div>
     </van-cell-group>
     <p>
@@ -53,6 +63,9 @@ export default {
   },
   components: {},
   methods: {
+    back(){
+      this.$router.back()
+    },
     signIn() {
       let username = this.username;
       let password = this.password;
@@ -62,12 +75,29 @@ export default {
           message: "用户名或密码不能为空"
         }).then(() => {
           // on close
-          this.$router.push('/sign');
+          this.$router.push("/sign");
         });
       } else {
         axios.post("/sign", { username, password }).then(data => {
-          console.log('注册成功',data)
-        });
+          console.log(data);
+          if (data.data.code == 0) {
+            Dialog.alert({
+              title: "💐💐💐",
+              message: "恭喜你注册成功!"
+            }).then(() => {
+              // on close
+              this.$router.push("/login");
+            })
+          }else{
+            Dialog.alert({
+              title: "⚠️警告",
+              message: "用户名已存在!"
+            }).then(() => {
+              // on close
+              this.$router.push("/sign");
+            })
+          }
+        })
       }
     }
   }
@@ -84,13 +114,22 @@ export default {
   height: 30vw;
   margin: 15vw auto;
   border-radius: 50%;
-  background-image: url("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=100621987,2321697308&fm=26&gp=0.jpg");
+  background-image: url("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2468770489,773317773&fm=26&gp=0.jpg");
   background-size: cover;
   background-position: center center;
   > img {
     width: 100%;
     height: 100%;
   }
+}
+.ico{
+  position:absolute;
+  top:5vw;
+  left:3vw;
+  // width:5vw;
+  // height:5vw;
+  color:#909399;
+  font-size:1.8em;
 }
 .ra {
   color: rgba(0, 0, 0, 0.4);

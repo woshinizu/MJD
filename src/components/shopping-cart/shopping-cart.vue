@@ -2,13 +2,26 @@
     <div class="content">
         <header class="header">
             <div class="title">购物车</div>
-            <div class="edit_title">编辑</div>
+            <div class="edit_title" v-if="!type" @click="edit">编辑</div>
+            <div class="edit_title" v-else @click="edit">完成</div>
         </header>
-        <main v-for="item in ary" :key="item.shopId">
-            <shopping-item v-model="ary" @shopSelect="shopSelect" :spuInfo="item"></shopping-item>
+        <main v-for="item in shoppingList.ary" :key="item.shopId">
+            <shopping-item
+                v-model="shoppingList.ary"
+                @shopSelect="shopSelect"
+                :spuInfo="item"
+                @itemSelect="itemSelect"
+            ></shopping-item>
         </main>
         <div class="total">
-            <total :totalPrice="totalPrice" :all="all"></total>
+            <total
+                :totalPrice="totalPrice"
+                :type="type"
+                :shoppingList="shoppingList"
+                @allSelect="allSelect"
+                :selectAll="selectAll"
+            >
+            </total>
         </div>
     </div>
 </template>
@@ -20,81 +33,92 @@ export default {
     name: 'shoppingcart',
     data() {
         return {
-            all:false,
-            ary: [
-                {
-                    shopId: 1,
-                    name: 'JD自营',
-                    allSelect: false,
-                    joincart: [
-                        {
-                            id: 1,
-                            title: '华为(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
-                            item:{
-                                颜色: '红色',
-                                大小: '512g',
+            type: 0,
+            shoppingList:{
+                ary: [
+                    {
+                        shopId: 1,
+                        name: 'JD自营',
+                        allSelect: false,
+                        joincart: [
+                            {
+                                id: 1,
+                                title: '华为(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
+                                item:{
+                                    颜色: '红色',
+                                    大小: '512g',
+                                },
+                                price: 1000,
+                                num: 4,
+                                image: '../../assets/logo.png',
+                                isSelect: false,
+                                shopId: 1,
+                                name: 'JD自营',
                             },
-                            price: 1000,
-                            num: 4,
-                            image: '../../assets/logo.png',
-                            isSelect: false,
-                        },
-                        {
-                            id: 2,
-                            title: '荣耀(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
-                            item:{
-                                颜色: '银色',
-                                大小: '256g',
+                            {
+                                id: 2,
+                                title: '荣耀(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
+                                item:{
+                                    颜色: '银色',
+                                    大小: '256g',
+                                },
+                                price: 500,
+                                num: 2,
+                                image: '../../assets/logo.png',
+                                isSelect: false,
+                            }
+                        ],
+                    },
+                    {
+                        shopId: 2,
+                        name: '华为旗舰店',
+                        allSelect: false,
+                        joincart: [
+                            {
+                                id: '1',
+                                title: '华为(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
+                                item:{
+                                    颜色: '红色',
+                                    大小: '512g',
+                                },
+                                price: 1000,
+                                num: 4,
+                                image: '../../assets/logo.png',
+                                isSelect: false,
                             },
-                            price: 500,
-                            num: 2,
-                            image: '../../assets/logo.png',
-                            isSelect: false,
-                        }
-                    ],
-                },
-                {
-                    shopId: 2,
-                    name: '华为旗舰店',
-                    allSelect: false,
-                    joincart: [
-                        {
-                            id: '1',
-                            title: '华为(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
-                            item:{
-                                颜色: '红色',
-                                大小: '512g',
-                            },
-                            price: 1000,
-                            num: 4,
-                            image: '../../assets/logo.png',
-                            isSelect: false,
-                        },
-                        {
-                            id: '2',
-                            title: '荣耀(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
-                            item:{
-                                颜色: '银色',
-                                大小: '256g',
-                            },
-                            price: 500,
-                            num: 2,
-                            image: '../../assets/logo.png',
-                            isSelect: true,
-                        }
-                    ],
-                }
-            ]
+                            {
+                                id: '2',
+                                title: '荣耀(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
+                                item:{
+                                    颜色: '银色',
+                                    大小: '256g',
+                                },
+                                price: 500,
+                                num: 2,
+                                image: '../../assets/logo.png',
+                                isSelect: false,
+                            }
+                        ],
+                    }
+                ]
+            }
+            
         }
     },
     computed:{
         totalPrice(){
-            return this.ary.reduce((prev,next) => {
+            return this.shoppingList.ary.reduce((prev,next) => {
                 let sum = next.joincart.reduce((p,n) => {
                     return p+(n.isSelect ? n.price*n.num : 0)
                 },0);
-                return prev+sum
+                return prev + sum
             },0);
+        },
+        selectAll(){
+            return !(this.shoppingList.ary.some(item => {
+                console.log(item.allSelect);
+                return item.allSelect == false
+            }));
         }
     },
     craeted(){
@@ -105,25 +129,58 @@ export default {
     },
     methods:{
         shopSelect(id,select){
+            //点击店铺前选择按钮的方法
             if(id){
-                let i = '';
-                let newAry = this.ary.filter((item,index) => {
-                    i=index;
+                let i = null;
+                let newItem = this.shoppingList.ary.find((item,index) => {
+                    console.log(index);
+                    i = index;
                     return item.shopId == id
                 });
-                newAry[0].allSelect = true;
-                newAry[0].joincart.forEach(element => {
-                    element.isSelect = true;
+                newItem.allSelect = select;
+                newItem.joincart.forEach(element => {
+                    element.isSelect = select;
                 });
-                this.ary[i-1] = newAry[0];
-                console.log(11111111111);
-                console.log(this.ary);
+                this.shoppingList.ary[i] = newItem;
             }
         },
-        itemSelect(){
-
+        itemSelect(id, shopid, select){
+            //点击商品前选择按钮的方法
+            let i = null;
+            let shop = this.shoppingList.ary.find((item, index) => {
+                i = index;
+                return item.shopId == shopid
+            });
+            if(select){
+                shop.allSelect = !(shop.joincart.some(item=> {
+                    return item.id != id ? item.isSelect == false : null
+                }));
+                this.shoppingList.ary[i] = shop;
+            } else{
+                this.shoppingList.ary[i].allSelect = false;
+            }
+            console.log(this.shoppingList.ary);
+        },
+        allSelect(select){
+            //点击全选的方法
+            this.shoppingList.ary.forEach(item => {
+                this.shopSelect(item.shopId,select)
+            })
+        },
+        edit(){
+            this.type = !this.type;
         }
-    }
+    },
+    watch: {
+        // shoppingList:{
+        //     deep:true,// 深度
+        //     immediate:true,// 上来先执行一次
+        //     handler(newV,oldV){
+        //         // 深度侦听  vue没有给我们保留旧值
+        //         console.log(newV,oldV)
+        //     }
+        // }
+    },
 
 }
 </script>

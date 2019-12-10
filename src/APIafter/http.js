@@ -1,11 +1,11 @@
 let express = require('express');
+let session = require('express-session')
+let qs = require('qs');
 let app = express();
 let { readFile, writeFile } = require('./promiseFs')
 let md5 = require('md5')
-let qs =require('qs')
 
 app.listen(3000, function () {
-    // console.log(md5('1234456'))
     console.log('后台服务起于3000')
 })
 
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
     
 })
 
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
     let strshang = '';
     req.on('data', (chunkshang) => {
         strshang += chunkshang;
@@ -43,8 +43,8 @@ app.use((req, res, next) => {
         req.bodyshang = objshang;
         next();
     })
-})
-app.use('/home',require('./home.js'))
+}) */
+// app.use('/home',require('./home.js'))
 //// 尚帅 use end
 
 
@@ -68,6 +68,13 @@ app.use((req, res, next) => {
     }).catch(err => res.status(500));
 })
 
+app.use((req, res, next) => {
+    readFile('./json/hdpic.json').then(data => {
+        req.hdImg = JSON.parse(data.toString())
+        next();
+
+    })
+})
 
 app.use((req, res, next) => {
     let str = '';
@@ -86,49 +93,142 @@ app.use((req, res, next) => {
     })
 })
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', true)
+    res.header('Access-Control-Allow-Headers', "Content-Type,X-Agent,X-Token,X-Legacy-Token,X-Legacy-Uid,X-Legacy-Device-Id,X-Legacy-New-Token,X-Request-Id")
+    next()
+})
+
+app.use(session({
+    name: 'a',
+    secret: 'b',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: 1000 * 60 * 30
+    }
+}))
+
+
+// 登录接口
 app.post('/login', function (req, res) {
-    // let { username, password } = req.userData;
     let ary = req.userData;
-    let type = req.body;
+    let { username, password } = req.body;
     let temp;
-
-    temp = ary.some(item => (item.username == type.username) && (item.password == type.password))
-
+    temp = ary.some(item => (item.username == username) && (item.password == password))
     if (temp) {
+        // 登陆成功给session种植了一个userId属性
+        req.session.userId = username;
         res.send({
-            code: 0
+            code: 0,
+            data: {
+                name: req.session.userId
+            }
         })
     } else {
         res.send({
-            code: 1
+            code: 1,
+            data: 'err'
         })
     }
-
-    console.log('req.userData', req.userData)
-    console.log('req.body', req.body)
 })
+
+// 上面中间件中的req.session.userId大有用处 我们在请求页面，判断是否是登录状态的时候可以用req.session.userId；
+
+
+// 我的中的推荐列表接口
+app.post('/index/my', function (req, res) {
+    let data = req.data;
+    console.log(req.session)
+    // console.log(req.hdImg)
+    if (req.session.userId) {
+        res.send({
+            code: 0,
+            data: Object.values(data),
+            userdata: req.session.userId,
+            img:req.hdImg
+        })
+    }else{
+        res.send({
+            code: 1,
+            // data: Object.values(data),
+            // userdata: req.session.userId,
+            // img:req.hdImg
+        })
+    }
+})
+
 
 
 // 注册接口
-// 接收数据
-app.use((req, res, next) => {
-    let str = '';
-    req.on('data', (chunk) => {
-        str += chunk;
+app.post('/sign', function (req, res) {
+    // 实现注册接口
+    let { username, password } = req.body;
+    let data = req.userData;
+    let judge = data.some(item => {
+        return item.username === username
     })
-    req.on('end', () => {
-        let obj = {};
-        try {
-            obj = JSON.parse(str)
-        } catch (error) {
-            obj = qs.parse(str)
-        }
-        // 接收到注册页面写入的数据
-        req.sign = obj;
-        next();
+    if (judge) {
+        res.send({
+            code: 1,
+            msg: 'already'
+        })
+        return;
+    }
+    data.push(req.body);
+    writeFile('./user.json', JSON.stringify(data)).then(data => {
+        // 写入成功
+        res.send({
+            code: 0,
+            data: 'success'
+        })
+    }).catch(() => {
+        res.send({
+            code: 1,
+            data: 'fail'
+        })
     })
 })
 
+
+// 请求setting页面接口
+app.post('/setting', function (req, res) {
+    let data = req.data;
+    console.log(req.session)
+    if (req.session.userId) {
+        res.send({
+            code: 0,
+            userdata: req.session.userId,
+            img:req.hdImg
+        })
+    }
+})
+
+
+// 清除session.userId接口
+app.post('/delSession', function (req, res) {
+    // req.session.removeAttribute(req.session.userId)
+    req.session.userId = null;
+    if (!req.session.userId) {
+        res.send({
+            code: 0,
+        })
+    }
+})
+
+
+// 首页请求接口
+app.post('/index', function (req, res) {
+    if (req.session.userId) {
+        res.send({
+            code: 0,
+            // userdata: req.session.userId
+        })
+    }
+})
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
 app.post('/sign', function (req, res) {
     readFile('./json/user.json').then(data => {
         data = JSON.parse(data);
@@ -144,7 +244,8 @@ app.post('/sign', function (req, res) {
 
 
 
-app.use((req,res)=>{
-    res.status(404),
-    res.send('asd')
-})
+// app.use((req,res)=>{
+//     res.status(404),
+//     res.send('asd')
+
+// })

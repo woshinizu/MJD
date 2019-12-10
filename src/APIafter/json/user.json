@@ -1,36 +1,31 @@
 [
     {
-        "id": 1,
         "username": "刘明霞",
-        "password": "123456",
-        "payPassword":""
-    }
-    ,
+        "password": "123456"
+    },
     {
-        "id": 2,
         "username": "曾东杰",
-        "password": "123456",
-        "payPassword":""
-    }
-    ,
+        "password": "123456"
+    },
     {
-        "id": 3,
         "username": "娄梦梦",
-        "password": "123456",
-        "payPassword":""
-    }
-    ,
+        "password": "123456"
+    },
     {
-        "id": 4,
         "username": "尚帅",
         "password": "123456",
         "payPassword":""
     },
     {
-        "id": 5,
         "username": "杨洋",
-        "password": "123456",
-        "payPassword":""
+        "password": "123456"
+    },
+    {
+        "username": "test",
+        "password": "123456"
+    },
+    {
+        "username": "test1",
+        "password": "000000"
     }
-  
 ]

@@ -7,11 +7,5 @@ export default [
         children:[
            
         ]
-    },
-    // {
-    //     path:'/index/details',
-    //     name:'details',
-    //     component:details,
-
-    // }
+    }
 ]

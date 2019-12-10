@@ -1,18 +1,25 @@
 <template>
   <div class="main">
     <div>
+      <div class="ico" @click="bk">
+        <van-icon name="arrow-left" />
+      </div>
       <div class="banner">账户设置</div>
     </div>
     <div class="first">
       <div class="login">
-        <div class="imgbox"></div>
-        <div class="rt">
+        <div class="imgbox"  v-for="v in arr"  :style="{backgroundImage:`url(${v.pic})`}" :key="v.pic"></div>
+        <div class="lower"></div>
+        <div class="rt" v-if="flag">
           <span>
             <router-link to="/login">登录/</router-link>
           </span>
           <span>
             <router-link to="/sign">注册</router-link>
           </span>
+        </div>
+        <div class="els" v-else>
+          <span>用户名：{{des}}</span>
         </div>
         <div class="icon">
           <van-icon name="arrow" color="#909399" />
@@ -51,21 +58,70 @@
         <span>关于京东app</span>
       </div>
     </div>
+    <router-link to="/login">
+      <div class="fourth" v-if="!flag" @click="cleLocal">
+        <span>退出登录</span>
+      </div>
+    </router-link>
   </div>
 </template>
 <script>
 // @ is an alias to /src
+// import axios from ''
+import { getcookie, setcookie, removecookie } from "../APIafter/cookie";
 export default {
   name: "setting",
   data() {
-    return {};
+    return {
+      flag: true,
+      arr:[]
+    };
   },
   components: {},
-  methods: {
-      clcookie(){
-          
-      }
+  created() {
+    fetch("/setting", {
+      method: "post"
+    })
+      .then(Response => {
+        return Response.json();
+      })
+      .then(data => {
+        console.log(data);
+        if (data.code == 0) {
+          this.des = data.userdata;
+          this.arr = data.img.filter(item => item.username == this.des);
+          this.flag = false;
+        }
+        this.ary = data.data;
+        console.log(this.ary);
+      });
   },
+  methods: {
+    bk(){
+      this.$router.back()
+    },
+    clcookie() {},
+    cleLocal() {
+      // console.log(666)
+      // removecookie('a','http://localhost:8080/')
+      fetch("/delSession", {
+      method: "post"
+    })
+      .then(Response => {
+        return Response.json();
+      })
+      .then(data => {
+        console.log(data);
+        if (data.code == 0) {
+          // this.des = data.userdata;
+          this.flag = true;
+
+        }
+        this.ary = data.data;
+        console.log(this.ary);
+      });
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
@@ -73,6 +129,15 @@ export default {
   background: #eee;
   height: 100vh;
   width: 100vw;
+  .ico{
+  position:absolute;
+  top:5vw;
+  left:3vw;
+  // width:5vw;
+  // height:5vw;
+  color:#fff;
+  font-size:1.8em;
+}
   .banner {
     background-image: url("http://img2.imgtn.bdimg.com/it/u=1686753727,485296867&fm=26&gp=0.jpg");
     background-size: cover;
@@ -98,6 +163,18 @@ export default {
         position: absolute;
         top: 24vw;
         left: 4vw;
+        z-index:1;
+        width: 16vw;
+        height: 16vw;
+        border-radius: 50%;
+        background: url("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3243257367,27035386&fm=26&gp=0.jpg");
+        background-size: cover;
+        background-position: center center;
+      }
+      .lower {
+        position: absolute;
+        top: 24vw;
+        left: 4vw;
         width: 16vw;
         height: 16vw;
         border-radius: 50%;
@@ -112,6 +189,14 @@ export default {
         > span > a {
           color: #909399;
           font-size: 0.9em;
+        }
+      }
+      .els {
+        position: absolute;
+        top: 29vw;
+        left: 25vw;
+        > span {
+          color: #909399;
         }
       }
       .icon {
@@ -144,7 +229,7 @@ export default {
       line-height: 16vw;
       border-bottom: 1px solid #f3f0f0;
 
-      >span {
+      > span {
         font-size: 0.9em;
         color: #909399;
         padding-left: 6vw;
@@ -162,14 +247,14 @@ export default {
     }
   }
   .third {
-      margin-top: 8vw;
+    margin-top: 8vw;
     background: #fff;
     border-radius: 5%;
     > div {
       height: 16vw;
       line-height: 16vw;
       border-bottom: 1px solid #f3f0f0;
-       >span {
+      > span {
         font-size: 0.9em;
         color: #909399;
         padding-left: 6vw;
@@ -178,6 +263,16 @@ export default {
         }
       }
     }
+  }
+  .fourth {
+    background: #fff;
+    height: 16vw;
+    margin-top: 5vw;
+    line-height: 16vw;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    text-align: center;
+    color: #909399;
   }
 }
 </style>
