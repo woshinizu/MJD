@@ -1,7 +1,9 @@
 <template>
     <div>
         <div>
-             <van-icon name="arrow-left" class="icon"/>
+            <router-link to="/index/found">
+            <van-icon name="arrow-left" class="icon"/>
+            </router-link>
         <van-swipe :autoplay="3000" indicator-color="white">
          
         <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
@@ -13,7 +15,7 @@
         <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
         <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
         </van-swipe>
-        <van-icon name="ellipsis" class="san"/>
+        <van-icon name="ellipsis" class="san" @click="changeShow"/>
       </div>
         <div class="price">
             <div>
@@ -37,7 +39,10 @@
             荣耀10青春版 幻彩渐变 2400万AI自拍 全网通版4GB+64GB 渐变蓝 移动联通电信4G全面屏手机
         </div>
         <div class="desc">限时优惠899！2400万AI高清自拍，麒麟710处理器，炫光渐变色！荣耀爆品特惠，选品质，购荣耀~ 
-          <a href="#">查看</a>
+            <router-link to="/look">
+                 <a href="#">查看</a>
+            </router-link>
+          
         </div>
         <div class="select">
             <h3>已选</h3>
@@ -46,20 +51,56 @@
             </div>
             <van-icon name="ellipsis" @click="onEditIcon" class="dian"/>
         </div>
-        <div class="imgBox">
-            <img src="https://m.360buyimg.com/babel/jfs/t1/101001/39/5346/238638/5dedabb8Ef016a1cb/87d02d8442699f3e.jpg!q70.dpg">
+        <van-icon name="play"  class="sanjiao" v-show="isShow"/>
+        <div class="box" v-show="isShow">
+            <ul>
+                <li>
+                    <van-icon name="wap-home-o" />
+                    <router-link to="/index/home">
+                        <span>首页</span>
+                    </router-link>
+                    
+                </li>
+                <li>
+                    <van-icon name="search" />
+                    <router-link to="/search">
+                        <span>搜索</span>
+                    </router-link>
+                    
+                </li>
+                <li>
+                    <van-icon name="user-o" />
+                    <router-link to="/index/found">
+                        <span>我的京东</span>
+                    </router-link>
+                    
+                </li>
+                <li>
+                    <van-icon name="exchange" />
+                    <span>浏览记录</span>
+                </li>
+                <li>
+                    <van-icon name="like-o" />
+                    <router-link to="/index/my">
+                        <span>我的关注</span>
+                    </router-link>
+                    
+                </li>
+            </ul>
         </div>
       </div>
       
       <div>
           <van-goods-action>
-            <van-goods-action-icon icon="chat-o" text="客服" @click="onClickIcon" />
             <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon" />
+            <router-link to="/homePage">
+                <van-goods-action-icon icon="shop-o" text="店铺" info="12" />
+            </router-link>
             <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
             <van-goods-action-button type="danger" text="立即购买" @click="onClickBuyButton" />
             </van-goods-action>
       </div>
-      <sku-list :show="show" @goodsId="goodsId" :type="type" @changeShow="changeShow"></sku-list>
+      <sku-list :show="show" @goodsId="goodsId" :type="type" @changeskuShow="changeskuShow"></sku-list>
     </div>
 </template>
 <script>
@@ -74,6 +115,7 @@ export default {
       goodsId: 2259,
       type: 'add',
       selectCt: '',
+      isShow:false,
     }
     },
     methods: {
@@ -91,7 +133,7 @@ export default {
             this.show = true;
             this.type = 'add';
         },
-        changeShow(selectCt){
+        changeskuShow(selectCt){
             this.selectCt = selectCt;
             this.show = !this.show;
         },
@@ -99,6 +141,9 @@ export default {
             this.show = true;
             this.type = 'edit';
         },
+        changeShow(){
+            this.isShow = !this.isShow
+        }
     },
     components:{
         'sku-list':skuList,
@@ -235,13 +280,38 @@ export default {
         color: gray;
     }
 }
-.imgBox{
-    width: 92vw;
-    height: 100vw;
-    margin-bottom: 17vw;
-    img{
+.box{
+    background: rgba(0,0,0,0.5);
+    width: 30vw;
+    height: 50vw;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    ul{
         width:100%;
-        height:100%
+        height:100%;
+        li{
+            height:10vw;
+            line-height:10vw;
+            span{
+                color: #fff;
+                margin: 0 3vw;
+                font-size: 4vw;
+                border-bottom: 1px solid #fff;
+                width: 10vw;
+            }
+            i{
+                color:#fff;
+                margin-left: 1vw;
+            }
+        }
     }
+}
+.sanjiao{
+    position: absolute;
+    top: 40px;
+    right: 29px;
+    transform: rotate(-90deg);
+    color: rgba(0,0,0,0.5);
 }
 </style>

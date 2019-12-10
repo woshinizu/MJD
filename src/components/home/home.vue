@@ -79,7 +79,9 @@
               v-for="i in ary"
               :key="i"
             >
-              <div style="width: 14vw;background: #ccc;height: 14vw;margin: auto;"></div>
+              <div style='width: 14vw;height: 14vw;background: #ccc;border-radius: 50%; margin: auto;' alt="">
+                <img src="../../assets/1.png" alt="">
+              </div>
               <p style="text-align: center;">{{i}}</p>
             </div>
           </van-tab>
@@ -91,15 +93,16 @@
 </template>
 <script>
 import Main from "@/components/home/main/main.vue";
+// Vue.component('my-img',{
+//   template:'<img src="../../assets/1.png" alt="">',
+//   name:'my-img'
+// })
 export default {
   data() {
     return {
       value: "",
       ary: [
-        "京东超市",
-        "数码电器",
-        "京东服饰",
-        "京东生鲜",
+        "京东超市","数码电器","京东服饰","京东生鲜",
         "京东到家",
         "充值缴费",
         "9.9元拼",
@@ -131,6 +134,7 @@ export default {
   .tabBox {
     top: 0;
     .Control {
+     
     }
   }
 }

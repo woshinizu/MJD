@@ -36,7 +36,7 @@ export default {
     display: inline-block;
     width: 76vw;
     position: absolute;
-    font-size: 0.9rem;
+    font-size: 1vw;
     padding: 2vw;
     overflow: hidden;
   }
@@ -48,22 +48,22 @@ export default {
   }
   .p1 {
       position: absolute;
-      top: 8vh;
+      top: 7.5vh;
       left: 22vw;
     display: inline-block;
     // margin-top: 5vh;
-    font-size: 0.8rem;
+    font-size: 1vw;
     // margin-right: 15vw;
     top: 17vw;
   }
   .p2 {
       position: absolute;
-      top: 11vh;
+      top: 12vh;
       left: 22vw;
     display: inline-block;
     // margin-left: 20vw;   
     // margin-top: 2.6vh;
-    font-size: 0.8rem;
+    font-size: 1vw;
   }
   .shopsDXI{
       position: absolute;

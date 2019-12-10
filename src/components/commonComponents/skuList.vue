@@ -94,7 +94,7 @@ export default {
             },
             set(val){
                 if(val != this.show){
-                    this.$emit('changeShow')
+                    this.$emit('changeskuShow')
                 }
             }
         }
