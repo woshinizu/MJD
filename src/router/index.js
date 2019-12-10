@@ -14,6 +14,7 @@ import details from '@/components/commonComponents/details.vue'
 import look from '@/components/commonComponents/look.vue'
 import homePage from '@/components/commonComponents/homePage.vue'
 import particulars from '@/components/commonComponents/particulars.vue'
+import placeOrder from '@/components/placeOrder/placeOrder.vue'
 
 import Search from '@/components/home/header/search.vue'
 import SearchList from '@/components/home/header/searchList.vue'
@@ -72,6 +73,11 @@ const routes = [
     path:'/particulars',
     name:'particulars',
     component:particulars
+  },
+  {
+    path:'/placeOrder',
+    name:'placeOrder',
+    component:placeOrder,
   }
 ]
 
