@@ -1,5 +1,4 @@
 import found from '@/components/found/found.vue'
-import details from '@/components/commonComponents/details.vue'
 export default [
     {
         path:'/index/found',
@@ -8,10 +7,5 @@ export default [
         children:[
            
         ]
-    },{
-        path:'/index/details',
-        name:'details',
-        component:details,
-
     }
 ]

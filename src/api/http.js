@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let url = process.env.NODE_ENV !== 'production' ? '' : ''; 
+let url = process.env.NODE_ENV !== 'development' ? 'http://localhost:3000/' : ''; 
 
 const http = axios.create({
     baseURL: url,
@@ -36,7 +36,7 @@ http.interceptors.response.use(function (response) {
     return Promise.reject(error);
   });
 
-// export default http;
+export default http;
 // let express = require('express');
 // let app = express();
 // let { readfile, writefile } = require('express')

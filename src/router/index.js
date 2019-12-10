@@ -4,17 +4,27 @@ import index from '../views/index.vue'
 import login from '../views/login.vue'
 import sign from '../views/sign.vue'
 import setting from '../views/setting.vue'
+// import Password from './my/se'nnguyjhbmn
 import home from './home/home'
 import found from './found/found'
 import classification from './classification/classification'
 import my from './my/my'
 // import login from './my/my'
 import shoppingcart from './shoppingcart/shopping-cart'
+import details from '@/components/commonComponents/details.vue'
+import look from '@/components/commonComponents/look.vue'
+import homePage from '@/components/commonComponents/homePage.vue'
+import particulars from '@/components/commonComponents/particulars.vue'
+import placeOrder from '@/components/placeOrder/placeOrder.vue'
+
 import Search from '@/components/home/header/search.vue'
 import SearchList from '@/components/home/header/searchList.vue'
 import adr from '../views/adr.vue'
 import newAdd from '../views/newAdd.vue'
 import bianji from '../views/bianji.vue'
+
+import setPassword from '@/views/Password/setPassword.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,9 +48,14 @@ const routes = [
   {
     path: '/setting',
     name: 'setting',
-    component: setting
+    component: setting,
   },
   {
+    path:'/details',
+    name:'details',
+    component:details,
+
+},{
     path:'/search',
     name:'search',
     component:Search,
@@ -64,6 +79,31 @@ const routes = [
     path:'/bianji',
     name:'bianji',
     component:bianji
+  },
+    {
+    path:'/look',
+    name:'look',
+    component:look
+  },
+  {
+    path:'/homePage',
+    name:'homePage',
+    component:homePage
+  },
+  {
+    path:'/particulars',
+    name:'particulars',
+    component:particulars
+  },
+  {
+    path:'/placeOrder',
+    name:'placeOrder',
+    component:placeOrder,
+  },
+  {
+    path:'/setPassword',
+    name:'setPassword',
+    component:setPassword,
   }
 ]
 

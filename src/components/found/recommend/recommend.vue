@@ -8,10 +8,19 @@
               <img src="../../../assets/logo.png" />
             </i>
             <p class="lt">膜法世家官方旗县店</p>
-            <van-button class="rt button" color="red" round type="info" size="small">+关注</van-button>
+            <van-button class="rt button" color="red" round type="info" size="small" @click="followe">+关注</van-button>
           </div>
           <div class="text">
             <ul @touchScroll="changeA">
+              
+              <li class="txBox lt">
+                <img src="../../../assets/logo.png" />
+                <p class="p1">膜法世家膜法世家膜法世家</p>
+                <p class="p2">￥199</p>
+                <p class="p3">￥299</p>
+              </li>
+              
+              
               <li class="txBox lt">
                 <img src="../../../assets/logo.png" />
                 <p class="p1">膜法世家膜法世家膜法世家</p>
@@ -30,12 +39,20 @@
                 <p class="p2">￥199</p>
                 <p class="p3">￥299</p>
               </li>
+              <router-link to="/details">
               <li class="txBox lt">
-                <img src="../../../assets/logo.png" />
-                <p class="p1">膜法世家膜法世家膜法世家</p>
-                <p class="p2">￥199</p>
-                <p class="p3">￥299</p>
+                <p class="p2" style="border: 1px solid #ee2c2c;
+                  width: 25vw;
+                  height: 30vw;
+                  border-radius: 4vw;
+                  text-align: center;
+                  color:#000;
+                  line-height: 30vw;
+                  font-weight: 900;
+                  font-size: 3vw;
+                  background: #f8c28b;">查看详情></p>
               </li>
+              </router-link>
             </ul>
           </div>
         </li>
@@ -55,7 +72,10 @@ export default {
     changeA(e) {
       console.log(e);
     },
-    add() {}
+    add() {},
+    followe(){
+
+    }
   }
 };
 </script>
@@ -71,8 +91,9 @@ export default {
 
     > li {
       width: 100%;
-      height: 60vw;
+      height: 65vw;
       border-radius: 10px;
+      
       .til {
         width: 100%;
         height: 15vw;
@@ -98,18 +119,21 @@ export default {
           margin: 10px;
         }
       }
+
+      
       .text {
         width: 92vw;
         height: 45vw;
-        overflow: hidden;
+        // overflow: hidden;
         ul {
-          width: 1000vw;
+          width: 100%;
           height: 50vw;
-          overflow: hidden;
+          overflow: scroll;
+          display:flex;
           .txBox {
             width: 35vw;
             height: 45vw;
-
+            float:left;
             img {
               width: 30vw;
               height: 25vw;

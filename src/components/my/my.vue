@@ -3,14 +3,18 @@
     <div class="mainbox">
       <!-- <van-uploader :after-read="afterRead" />
       <van-uploader v-model="fileList" multiple />-->
-      <div class="imgbox"></div>
-      <div class="rt">
+      <div class="imgbox"  v-for="v in arr" :style="{backgroundImage:`url(${v.pic})`}" :key="v.pic"></div>
+      <div class="lower"></div>
+      <div class="rt" v-if="flag">
         <span>
           <router-link to="/login">登录/</router-link>
         </span>
         <span>
           <router-link to="/sign">注册</router-link>
         </span>
+      </div>
+      <div class="els" v-else>
+        <span>{{des}}</span>
       </div>
       <div class="replay" @click="replay">
         <van-icon name="replay" color="#fff" size="1.4em" />
@@ -101,29 +105,29 @@
       <van-icon name="like" color="tomato" size="0.8em" />
     </div>
     <ul class="lk">
-      <li>
-         <div class="lt">
-          <div> 
-            <img
-              src="https://m.360buyimg.com/babel/s350x350_jfs/t1/54944/25/5319/145292/5d2ee0f4Edc726a86/88da314960c9583a.jpg!q70.dpg"
-              alt
-            />
+      <li v-for="item in ary" :key="item.pic">
+        <div class="lt">
+          <div>
+            <img :src="item[0].pic" alt />
           </div>
           <p>
-            <span>自营</span>音响音响音响
-            <span style="color:tomato;background:none;padding-top:2vw">￥2990</span>
+            <span>{{item[0].classify}}</span>
+            {{item[0].desc}}
+            <span
+              style="color:tomato;background:none;padding-top:2vw"
+            >￥{{item[0].price}}</span>
           </p>
         </div>
         <div class="rt">
           <div>
-            <img
-              src="https://img14.360buyimg.com/mobilecms/s372x372_jfs/t1/14949/9/4241/112484/5c304b10Ee04ada5f/c4bf4e75be0bc172.jpg!q70.dpg.webp"
-              alt
-            />
+            <img :src="item[1].pic" alt />
           </div>
           <p>
-            <span>自营</span>手表手表手表
-            <span style="color:tomato;background:none;padding-top:2vw">￥2990</span>
+            <span>{{item[1].classify}}</span>
+            {{item[1].desc}}
+            <span
+              style="color:tomato;background:none;padding-top:2vw"
+            >￥{{item[0].price}}</span>
           </p>
         </div>
       </li>
@@ -167,22 +171,48 @@ export default {
   name: "my",
   data() {
     return {
-      //   fileList: [
-      //     { url: "https://img.yzcdn.cn/vant/leaf.jpg" },
-      //     // Uploader 根据文件后缀来判断是否为图片文件
-      //     // 如果图片 URL 中不包含类型信息，可以添加 isImage 标记来声明
-      //     { url: "https://cloud-image", isImage: true }
-      //   ]
+      flag: true,
+      des: "",
+      ary: [],
+      arr: [],
+      img: true
     };
   },
   components: {},
+  created() {
+    fetch("/index/my", {
+      method: "post"
+    })
+      .then(Response => {
+        // console.log(data)
+        // this.ary=data;
+        // console.log(this.ary)
+        return Response.json();
+      })
+      .then(data => {
+        console.log(data);
+        if (data.code == 0) {
+          this.img = true;
+          this.des = data.userdata;
+          this.arr = data.img.filter(item => item.username == this.des);
+          console.log("this.arr", this.arr);
+          this.flag = false;
+           this.ary = data.data;
+        } else {
+         
+          this.img = false;
+        }
+
+        console.log(this.ary);
+      });
+  },
   methods: {
     // afterRead(file) {
     //   // 此时可以自行将文件上传至服务器
     //   console.log(file);
     // }
-    replay(){
-        // 请求一下页面
+    replay() {
+      // 请求一下页面
     }
   }
 };
@@ -204,6 +234,14 @@ a {
     height: 50vw;
     border-bottom-right-radius: 5%;
     border-bottom-left-radius: 5%;
+    .els {
+      position: absolute;
+      top: 17vw;
+      left: 31vw;
+      > span {
+        color: #fff;
+      }
+    }
 
     .setting {
       position: absolute;
@@ -220,7 +258,20 @@ a {
       position: absolute;
       top: 9vw;
       left: 5vw;
-      background-image: url("https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1657902631,1789704152&fm=26&gp=0.jpg");
+      z-index: 1;
+      background-image: url("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3287356001,3455067721&fm=26&gp=0.jpg");
+      background-size: cover;
+      background-position: center center;
+      width: 20vw;
+      height: 20vw;
+
+      border-radius: 50%;
+    }
+    .lower{
+      position: absolute;
+      top: 9vw;
+      left: 5vw;
+      background-image: url("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3243257367,27035386&fm=26&gp=0.jpg");
       background-size: cover;
       background-position: center center;
       width: 20vw;
@@ -324,6 +375,7 @@ a {
           }
         }
       }
+
       .lt {
         float: left;
       }
