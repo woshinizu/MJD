@@ -10,7 +10,9 @@
             <h2>发现</h2>
         </div>
         <div class="right rt">
-            <van-icon name="search" color="#ffffff" size="25px" class="r"/>
+            <router-link to="/search">
+                 <van-icon name="search" color="#ffffff" size="25px" class="r"/>
+            </router-link>
         </div>
     </div>
 
@@ -23,6 +25,14 @@
             <h5 class="lt">猜你喜欢</h5>
             <van-icon name="warning-o" class="rt" @click="add"/>
         </div>
+        <recommend></recommend>
+        <recommend></recommend>
+        <recommend></recommend>
+        <recommend></recommend>
+        <recommend></recommend>
+        <recommend></recommend>
+        <recommend></recommend>
+        <recommend></recommend>
         <recommend></recommend>
     </div>
 </div>
