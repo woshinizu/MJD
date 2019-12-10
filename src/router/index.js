@@ -4,6 +4,7 @@ import index from '../views/index.vue'
 import login from '../views/login.vue'
 import sign from '../views/sign.vue'
 import setting from '../views/setting.vue'
+// import Password from './my/se'nnguyjhbmn
 import home from './home/home'
 import found from './found/found'
 import classification from './classification/classification'
@@ -14,6 +15,8 @@ import details from '@/components/commonComponents/details.vue'
 
 import Search from '@/components/home/header/search.vue'
 import SearchList from '@/components/home/header/searchList.vue'
+
+import Password from '@/views/Password/setPassword.vue'
 
 Vue.use(VueRouter)
 
@@ -38,7 +41,7 @@ const routes = [
   {
     path: '/setting',
     name: 'setting',
-    component: setting
+    component: setting,
   },
   {
     path:'/details',
@@ -54,6 +57,11 @@ const routes = [
     path:'/searchList',
     name:'searchList',
     component:SearchList
+  },
+  {
+    path:'/setPassword',
+    name:'setpasswordshang',
+    component:Password
   }
 ]
 
