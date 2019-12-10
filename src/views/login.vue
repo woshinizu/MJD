@@ -1,6 +1,12 @@
 <template>
   <div>
     <van-cell-group>
+      <router-link to="">
+      <div class="ico" @click="back">
+        <van-icon name="arrow-left" />
+      </div>
+      </router-link>
+      
       <div class="imgbox"></div>
       <van-field
         left-icon="contact"
@@ -19,7 +25,6 @@
         :autofocus="true"
         style="width:80vw;margin:6vw auto;"
       />
-      <!-- <router-link to="/index/home" style="color:white"> -->
       <div @click="submit">
         <van-button
           type="warning"
@@ -27,7 +32,6 @@
           :round="true"
         >登录</van-button>
       </div>
-      <!-- </router-link> -->
       <router-link class="ra" to="/sign">新用户注册</router-link>
       <div></div>
     </van-cell-group>
@@ -41,6 +45,7 @@ import { Icon } from "vant";
 import Vue from "vue";
 import { Dialog } from "vant";
 import axios from "axios";
+import md5 from 'md5'
 // import sign from "@/router/sign/sign.js"
 Vue.use(Field);
 Vue.use(Icon);
@@ -55,6 +60,9 @@ export default {
   },
   components: {},
   methods: {
+     back(){
+      this.$router.back()
+    },
     submit() {
       let username = this.username;
       let password = this.password;
@@ -69,11 +77,11 @@ export default {
         });
       } else {
         // 输入用户名密码，与后台给的数据做对比，如果一致那么就返回code 0 登录成功
-        axios
-          .post("/login", { username, password })
+        axios.post("/login", { username,password})
           .then(data => {
             if (data.data.code == 0) {
               this.$router.push("/index/home");
+              // localStorage.
             } else {
               Dialog.alert({
                 title: "⚠️警告",
@@ -110,6 +118,15 @@ export default {
     width: 100%;
     height: 100%;
   }
+}
+.ico{
+  position:absolute;
+ top:5vw;
+  left:3vw;
+  // width:5vw;
+  // height:5vw;
+  color:#909399;
+  font-size:1.8em;
 }
 .ra {
   color: rgba(0, 0, 0, 0.4);

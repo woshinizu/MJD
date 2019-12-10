@@ -40,11 +40,15 @@
 </template>
 <script>
 import {icon} from "vant"
+import axios from 'axios'
 export default {
   data() {
     return {
 
     };
+  },
+  created() {
+
   },
   components: {
   },
