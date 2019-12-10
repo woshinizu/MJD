@@ -12,7 +12,9 @@ import my from './my/my'
 import shoppingcart from './shoppingcart/shopping-cart'
 import Search from '@/components/home/header/search.vue'
 import SearchList from '@/components/home/header/searchList.vue'
-
+import adr from '../views/adr.vue'
+import newAdd from '../views/newAdd.vue'
+import bianji from '../views/bianji.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -47,6 +49,21 @@ const routes = [
     path:'/searchList',
     name:'searchList',
     component:SearchList
+  },
+  {
+    path:'/adr',
+    name:'adr',
+    component:adr
+  },
+  {
+    path:'/newAdd',
+    name:'newAdd',
+    component:newAdd
+  },
+  {
+    path:'/bianji',
+    name:'bianji',
+    component:bianji
   }
 ]
 
