@@ -25,14 +25,20 @@
                 <div slot="action" @click="onSearch">搜索</div>
                 </van-search>
         </div>
-        <van-swipe :autoplay="3000" indicator-color="white">
-        <van-swipe-item><img src="//img10.360buyimg.com/cms/jfs/t1/99353/1/5477/503183/5dedb5c7Ece4b7723/876fa1ab92011809.jpg!q70.dpg.webp"></van-swipe-item>
-        <van-swipe-item><img src="//img10.360buyimg.com/cms/jfs/t1/99353/1/5477/503183/5dedb5c7Ece4b7723/876fa1ab92011809.jpg!q70.dpg.webp"></van-swipe-item>
-        <van-swipe-item><img src="//img10.360buyimg.com/cms/jfs/t1/99353/1/5477/503183/5dedb5c7Ece4b7723/876fa1ab92011809.jpg!q70.dpg.webp"></van-swipe-item>
-        <van-swipe-item><img src="//img10.360buyimg.com/cms/jfs/t1/99353/1/5477/503183/5dedb5c7Ece4b7723/876fa1ab92011809.jpg!q70.dpg.webp"></van-swipe-item>
-        </van-swipe>
+        <router-view></router-view>
         </van-tabs>
+        <van-tabbar v-model="active">
+        <van-tabbar-item icon="shop-o" 
+            v-for="item in ary"
+            :key="item.id"
+            :to="item.to"
+            :title="item.til"
+            :icon="item.icon"
+        >
+        {{item.til}}
+        </van-tabbar-item>
         
+        </van-tabbar>
         
     </div>
 </template>
@@ -42,7 +48,13 @@ export default {
     name: 'XXX',
     data() {
         return {
-        value:''
+        value:'',
+        active:0,
+        ary:[
+            {til:'首页',to:'/homePage/head',icon:'shop-o',id:1},
+            {til:'全部商品',to:'/homePage/allcommodity',icon:'bag',id:2},
+            {til:'活动',to:'/homePage/activity',icon:'new-o',id:3},
+            {til:'分类',to:'/homePage/sort',icon:'apps-o',id:4}]
         }
     },
     methods: {
