@@ -70,7 +70,26 @@ const routes = [
   {
     path:'/homePage',
     name:'homePage',
-    component:homePage
+    redirect:'/homePage/head',
+    component:homePage,
+    children:[
+      {
+        path:'/homePage/head',
+        component:() => import(/* webpackChunkName: "head" */ '../components/found/recommend/head.vue')
+      },
+      {
+          path:'/homePage/allcommodity',
+          component:() => import(/* webpackChunkName: "allcommodity" */ '../components/found/recommend/allcommodity.vue')
+      },
+      {
+          path:'/homePage/activity',
+          component:() => import(/* webpackChunkName: "activity" */ '../components/found/recommend/activity.vue')
+      },
+      {
+          path:'/homePage/sort',
+          component:() => import(/* webpackChunkName: "sort" */ '../components/found/recommend/sort.vue')
+      },
+    ]
   },
   {
     path:'/particulars',

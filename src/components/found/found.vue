@@ -26,14 +26,6 @@
             <van-icon name="warning-o" class="rt" @click="add"/>
         </div>
         <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
     </div>
 </div>
 </template>
