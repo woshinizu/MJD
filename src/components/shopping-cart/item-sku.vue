@@ -1,44 +1,61 @@
 <template>
     <div class="item_content">
         <div class="img_box">
-            <img class="img" src="../../assets/logo.png" alt="" />
+            <van-image
+                width="100"
+                height="100"
+                class="img"
+                radius="5px"
+                src="https://img.yzcdn.cn/vant/cat.jpeg"
+            />
+            <!-- <img class="img" src="../../assets/logo.png" alt="" /> -->
         </div>
         <div>
-            <div class="name">
+            <div :class="from == 'order' ? 'orderName'  : 'name'">
                 {{skuInfo.title}}
             </div>
             <div class="sku_line">
-                <van-button class="select_btn" @click="showPopup">
+                <div v-if="from == 'order'"><span class="orderSpecs">{{specs}}</span></div>
+                <van-button v-else class="select_btn" @click.stop="showPopup">
                     <div class="select">
                         <span>{{specs}}</span>
                         <van-icon class="drop_down" name="arrow-down" />
                     </div>
                 </van-button>
-                <van-popup position="bottom" :style="{ minHeight: '50%' }" v-model="show">内容</van-popup>
             </div>
             <div class="sku_sum">
                 <div class="money">
                     <span class="unit">￥</span>
                     <span class="num">{{skuInfo.price.toFixed(2)}}</span>
                 </div>
-                <van-stepper v-model="skuInfo.num" integer />
+                <div @click.stop="changeNum">
+                    <van-stepper v-model="skuInfo.num" integer />
+                </div>
             </div>
+        </div>
+        <div @click.stop="stop" v-if="show">
+            <sku-list :show="show" @goodsId="goodsId" :type="type" @changeskuShow="changeskuShow" :sku="sku"></sku-list>
         </div>
     </div>
 </template>
 <script>
 // @ is an alias to /src
+import skuList from '@/components/commonComponents/skuList.vue';
+import { getSkuList } from "@/api/shopping.js"
 export default {
     name: 'skuItem',
-    props: ['skuInfo'],
+    props: ['skuInfo', 'from'],
     data() {
         return {
-            show: false,
             value: 0,
+            show: false,
+            goodsId: 2259,
+            type: 'edit',
+            sku: '',
         }
     },
     components: {
-        
+        'sku-list':skuList,
     },
     computed:{
         specs(){
@@ -52,7 +69,25 @@ export default {
     },
     methods:{
          showPopup() {
-            this.show = true;
+            getSkuList().then(data => {
+                if(data.code == 0){
+                    this.sku = data.data[0];
+                    this.show = true;
+                    console.log(this.sku);
+                } else{
+                    Notify({ type: 'danger', message: '请求错误' });
+                }
+            })
+            
+        },
+        changeNum(){
+            console.log(111);
+        },
+        changeskuShow(){
+            this.show = !this.show;
+        },
+        stop(){
+            console.log('shop');
         }
     }
 }
@@ -63,8 +98,7 @@ export default {
         .img_box{
             margin: 0 2vw;
             .img{
-                width:20vw;
-                height: 20vw;
+                box-shadow: 0 0 18px 0 rgba(0,0,0,.05);
             }
         }
         .name{
@@ -78,14 +112,25 @@ export default {
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
         }
+        .orderName{
+            font-size: 16px;
+            padding-right: 10px;
+            margin-bottom: 3px;
+            word-break: break-all;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
         .sku_line{
             margin: 2vw 0;
             .select_btn{
                 width: 50vw;
                 background: #f7f7f7;
-                padding: 0 15px 0 10px;
-                height: 20px;
-                line-height: 20px;
+                padding: 0 2vw;
+                height: 5vw;
+                line-height: 5vw;
                 font-size: 10px;
                 color: #666;
                 border-radius: 50px;
@@ -98,16 +143,20 @@ export default {
                         white-space: nowrap;
                     }
                     .drop_down{
-                        line-height: 20px;
+                        line-height: 5vw;
                     }
                 }
+            }
+            .orderSpecs{
+                color: #666;
+                font-size: 12px;
             }
             
         }
         .sku_sum{
             display: flex;
-            height: 40px;
-            line-height: 40px;
+            height: 10vw;
+            line-height: 10vw;
             justify-content: space-between;
             .money{
                 color:#CA300A;

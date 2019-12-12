@@ -102,12 +102,13 @@
             <van-goods-action-button type="danger" text="立即购买" @click="onClickBuyButton" />
             </van-goods-action>
       </div>
-      <sku-list :show="show" @goodsId="goodsId" :type="type" @changeskuShow="changeskuShow"></sku-list>
+      <sku-list v-if="show" :sku="sku" :show="show" :goodsId="goodsId" :type="type" @changeskuShow="changeskuShow"></sku-list>
     </div>
 </template>
 <script>
 // @ is an alias to /src
 import skuList from '@/components/commonComponents/skuList.vue'
+import { getSkuList } from "@/api/shopping.js"
 export default {
     name: 'details1',
     data() {
@@ -118,7 +119,19 @@ export default {
       type: 'add',
       selectCt: '',
       isShow:false,
+      sku: '',
     }
+    },
+    created(){
+        getSkuList().then(data => {
+            if(data.code == 0){
+                this.sku = data.data[0];
+                // this.show = true;
+                console.log(this.sku);
+            } else{
+                Notify({ type: 'danger', message: '请求错误' });
+            }
+        })
     },
     methods: {
         onChange(index) {

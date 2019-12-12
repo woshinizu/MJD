@@ -4,25 +4,31 @@
             <van-checkbox
                 label-disabled
                 class="shopName"
-                @click.self="changeShopSelect"
+                @click.stop="changeShopSelect"
                 v-model="spuInfo.allSelect"
                 checked-color="#FD2607"
             >
                 {{spuInfo.name}}
             </van-checkbox>
-            <template v-for="(item,index) in spuInfo.joincart" >
+            <div
+                v-for="(item,index) in spuInfo.joincart" 
+                :key="item.id"
+                @click.stop="clickShop(item.id)"
+            >
+                <div class="product">
                     <van-checkbox
                         label-disabled
-                        @click.self="changItem"
+                        @click.stop="changItem"
                         v-model="item.isSelect"
                         checked-color="#FD2607"
-                        :key="item.id"
                         @click="changItem(item.id,item.isSelect)"
+                        class="iss"
                     >
-                        <sku-item :skuInfo="item"></sku-item>
                     </van-checkbox>
+                    <sku-item :skuInfo="item"></sku-item>
+                </div>
                 <van-divider :key="index" v-if=" index != spuInfo.joincart.length-1" />
-            </template>
+            </div>
         <!-- </van-checkbox-group> -->
     </div>
 </template>
@@ -66,6 +72,13 @@ export default {
         changItem(id,select){
             console.log(id,this.spuInfo.shopId,!select);
             this.$emit('itemSelect',id,this.spuInfo.shopId,!select);
+        },
+        clickShop(id){
+            console.log('clickShop');
+            this.$router.push({
+                path: '/details',
+                query: {id}
+            })
         }
     },
 }
@@ -77,9 +90,17 @@ export default {
         .shopName{
             font-weight: 600;
             padding: 2vw 0;
+            
         }
         .radio_Box{
             padding: 5vw 2vw 2vw;
         }
+        .product{
+            display: flex;
+            .iss{
+                min-width: 6vw;
+            }
+        }
+        
     }
 </style>

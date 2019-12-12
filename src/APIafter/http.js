@@ -15,7 +15,6 @@ app.use((req, res, next) => {
         req.data = JSON.parse(data)
         next();
     }).catch(err => res.status(500))
-    
 })
 
 // 尚帅 use start
@@ -232,7 +231,6 @@ app.post('/index', function (req, res) {
 app.post('/sign', function (req, res) {
     readFile('./json/user.json').then(data => {
         data = JSON.parse(data);
-        console.log(data)
         Object.assign(data, req.body)
         // 将注册的数据合并到user.json
         return writeFile('./json/user.json', JSON.stringify(data))
@@ -242,10 +240,16 @@ app.post('/sign', function (req, res) {
 })
 
 
+app.use((req, res, next) => {
+    readFile('./json/skuList.json').then(data => {
+        req.skuList = JSON.parse(data)
+        next();
+    }).catch(err => res.status(500))
+})
 
+app.use('/shopping', require('./routes/shopping'));
+app.use((req,res)=>{
+    res.status(404),
+    res.send('asd')
 
-// app.use((req,res)=>{
-//     res.status(404),
-//     res.send('asd')
-
-// })
+})

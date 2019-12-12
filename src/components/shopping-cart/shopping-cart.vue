@@ -5,9 +5,9 @@
             <div class="edit_title" v-if="!type" @click="edit">编辑</div>
             <div class="edit_title" v-else @click="edit">完成</div>
         </header>
-        <main v-for="item in shoppingList.ary" :key="item.shopId">
+        <main v-for="item in shoppingList" :key="item.shopId">
             <shopping-item
-                v-model="shoppingList.ary"
+                v-model="shoppingList"
                 @shopSelect="shopSelect"
                 :spuInfo="item"
                 @itemSelect="itemSelect"
@@ -34,8 +34,7 @@ export default {
     data() {
         return {
             type: 0,
-            shoppingList:{
-                ary: [
+            shoppingList: [
                     {
                         shopId: 1,
                         name: 'JD自营',
@@ -100,14 +99,13 @@ export default {
                             }
                         ],
                     }
-                ]
-            }
+            ],
             
         }
     },
     computed:{
         totalPrice(){
-            return this.shoppingList.ary.reduce((prev,next) => {
+            return this.shoppingList.reduce((prev,next) => {
                 let sum = next.joincart.reduce((p,n) => {
                     return p+(n.isSelect ? n.price*n.num : 0)
                 },0);
@@ -115,7 +113,7 @@ export default {
             },0);
         },
         selectAll(){
-            return !(this.shoppingList.ary.some(item => {
+            return !(this.shoppingList.some(item => {
                 console.log(item.allSelect);
                 return item.allSelect == false
             }));
@@ -132,8 +130,8 @@ export default {
             //点击店铺前选择按钮的方法
             if(id){
                 let i = null;
-                let newItem = this.shoppingList.ary.find((item,index) => {
-                    console.log(index);
+                let newItem = this.shoppingList.find((item,index) => {
+                    console.log('ggg',index);
                     i = index;
                     return item.shopId == id
                 });
@@ -141,13 +139,13 @@ export default {
                 newItem.joincart.forEach(element => {
                     element.isSelect = select;
                 });
-                this.shoppingList.ary[i] = newItem;
+                this.shoppingList[i] = newItem;
             }
         },
         itemSelect(id, shopid, select){
             //点击商品前选择按钮的方法
             let i = null;
-            let shop = this.shoppingList.ary.find((item, index) => {
+            let shop = this.shoppingList.find((item, index) => {
                 i = index;
                 return item.shopId == shopid
             });
@@ -155,15 +153,15 @@ export default {
                 shop.allSelect = !(shop.joincart.some(item=> {
                     return item.id != id ? item.isSelect == false : null
                 }));
-                this.shoppingList.ary[i] = shop;
+                this.shoppingList[i] = shop;
             } else{
-                this.shoppingList.ary[i].allSelect = false;
+                this.shoppingList[i].allSelect = false;
             }
-            console.log(this.shoppingList.ary);
+            console.log(this.shoppingList);
         },
         allSelect(select){
             //点击全选的方法
-            this.shoppingList.ary.forEach(item => {
+            this.shoppingList.forEach(item => {
                 this.shopSelect(item.shopId,select)
             })
         },
@@ -217,7 +215,7 @@ export default {
             width: 100%;
             height: 18vw;
             background: #fff;
-            opacity: 0.8;
+            // opacity: 0.8;
         }
         
     }

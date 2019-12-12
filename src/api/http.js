@@ -15,7 +15,7 @@ const http = axios.create({
     params:{
         t: Math.random()
     },
-    timeout: 1000,
+    timeout: 10000,
 })
 
 // 添加请求拦截器
