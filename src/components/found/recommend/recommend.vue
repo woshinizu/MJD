@@ -21,10 +21,9 @@
               </li>
               <router-link to="/details">
               <li class="txBox lt ll">
-                <router-link to="/details?productId=1">
-                <h2> 查看详情> </h2>
-                </router-link>
-                
+                  <router-link to="/details?productId=1">
+                  <h2> 查看详情> </h2>
+                  </router-link>
               </li>
               </router-link>
             </ul>
