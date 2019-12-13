@@ -115,6 +115,7 @@ export default {
         if (data.code == 0) {
           // this.des = data.userdata;
           this.flag = true;
+          localStorage.removeItem('username');
 
         }
         this.ary = data.data;

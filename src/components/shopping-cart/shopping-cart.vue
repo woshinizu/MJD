@@ -1,5 +1,5 @@
 <template>
-    <div class="content" v-if="shoppingList">
+    <div class="content" v-if="shoppingList || username">
         <header class="header">
             <div class="title">购物车</div>
             <div class="edit_title" v-if="!type" @click="edit">编辑</div>
@@ -23,6 +23,24 @@
             </total>
         </div>
     </div>
+    <div class="content" v-else>
+        <header class="header">
+            <div class="title">购物车</div>
+        </header>
+        <div class="gologin">
+            <span>登录后可同步用户账户购物中的商品</span>
+            <van-button class="btn2" color="#FD2607" @click="goLogin">登录</van-button>
+        </div>
+        <div class="img">
+            <van-image
+                round
+                width="20vw"
+                src="https://img11.360buyimg.com/jdphoto/s180x180_jfs/t18163/292/540553659/74408/adeb7463/5a93c51cN3bb5e37b.png"
+            />
+            <div>登录后可同步购物车中的商品</div>
+        </div>
+    </div>
+    
 </template>
 <script>
 // @ is an alias to /src
@@ -35,72 +53,7 @@ export default {
         return {
             type: 0,
             username: localStorage.getItem('username') || '',
-            shoppingList: '',
-            // shoppingList: [
-            //         {
-            //             shopId: 1,
-            //             name: 'JD自营',
-            //             joincart: [
-            //                 {
-            //                     id: 1,
-            //                     title: '华为(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
-            //                     item:{
-            //                         颜色: '红色',
-            //                         大小: '512g',
-            //                     },
-            //                     price: 1000,
-            //                     num: 4,
-            //                     image: '../../assets/logo.png',
-            //                     isSelect: false,
-            //                     shopId: 1,
-            //                     name: 'JD自营',
-            //                 },
-            //                 {
-            //                     id: 2,
-            //                     title: '荣耀(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
-            //                     item:{
-            //                         颜色: '银色',
-            //                         大小: '256g',
-            //                     },
-            //                     price: 500,
-            //                     num: 2,
-            //                     image: '../../assets/logo.png',
-            //                     isSelect: false,
-            //                 }
-            //             ],
-            //         },
-            //         {
-            //             shopId: 2,
-            //             name: '华为旗舰店',
-            //             joincart: [
-            //                 {
-            //                     id: '1',
-            //                     title: '华为(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
-            //                     item:{
-            //                         颜色: '红色',
-            //                         大小: '512g',
-            //                     },
-            //                     price: 1000,
-            //                     num: 4,
-            //                     image: '../../assets/logo.png',
-            //                     isSelect: false,
-            //                 },
-            //                 {
-            //                     id: '2',
-            //                     title: '荣耀(HUAWEI) MateBook D 14英寸全面屏轻薄笔记本电脑便携超级快充第三方Linux(AMD锐龙5 3500U 8+512GB)银',
-            //                     item:{
-            //                         颜色: '银色',
-            //                         大小: '256g',
-            //                     },
-            //                     price: 500,
-            //                     num: 2,
-            //                     image: '../../assets/logo.png',
-            //                     isSelect: false,
-            //                 }
-            //             ],
-            //         }
-            // ],
-            
+            shoppingList: [],
         }
     },
     computed:{
@@ -162,17 +115,12 @@ export default {
         },
         edit(){
             this.type = !this.type;
+        },
+        goLogin(){
+            this.$router.push('/login');
         }
     },
     watch: {
-        // shoppingList:{
-        //     deep:true,// 深度
-        //     immediate:true,// 上来先执行一次
-        //     handler(newV,oldV){
-        //         // 深度侦听  vue没有给我们保留旧值
-        //         console.log(newV,oldV)
-        //     }
-        // }
     },
 
 }
@@ -212,6 +160,22 @@ export default {
             background: #fff;
             // opacity: 0.8;
         }
+        .gologin{
+            height: 20vw;
+            line-height: 20vw;
+            text-align: center;
+            background: #fff;
+            .btn2{
+                height: 10vw;
+                line-height: 10vw;
+                margin: 0 2vw;
+            }
+        }
+        .img{
+            text-align: center;
+            margin: 20vw 0;
+        }
+
         
     }
     
