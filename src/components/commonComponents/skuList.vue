@@ -6,7 +6,7 @@
             :goods="sku.goods"
             :goods-id="goodsId"
             :quota="quota"
-            :initial-sku="initialSku"
+            :initial-sku="initialSku || {}"
             :quota-used="quotaUsed"
             :hide-stock="sku.hide_stock"
              @buy-clicked="onClicked"
@@ -23,13 +23,12 @@ import skuItem from '@/components/shopping-cart/item-sku';
 import { addCart } from "@/api/shopping.js"
 export default {
     name: 'skuList',
-    props: ['show','goodsId', 'type','sku'],
+    props: ['show','goodsId', 'type','sku', 'initialSku'],
     data() {
         return {
             quota: 0,
             quotaUsed: 0,
             username: localStorage.getItem('username') || '',
-            initialSku: {},
             // initialSku: {
             //     // 键：skuKeyStr（sku 组合列表中当前类目对应的 key 值）
             //     // 值：skuValueId（规格值 id）
@@ -42,7 +41,7 @@ export default {
             };
     },
     created(){
-        console.log(this.sku);
+        console.log(this.initialSku);
     },
     computed:{
         showContent:{
@@ -73,10 +72,11 @@ export default {
                 skuInfo.skuId= skuData.selectedSkuComb.id;
                 skuInfo.title= this.sku.goods.title;
                 skuInfo.price= this.sku.list.find(item => item.id = skuInfo.skuId).price;
-                skuInfo.num = skuData.selectedNum;
+                skuInfo.num = this.initialSku.selectedNum = skuData.selectedNum;
                 skuInfo.isSelect=false;
                 skuInfo.item = {};
                 let names = Object.keys(skuData.selectedSkuComb);
+                // this.initialSku = skuData.selectedSkuComb;
                 names.forEach(item => {
                     this.sku.tree.forEach(v => {
                         if(item == v.k_s){
@@ -84,6 +84,7 @@ export default {
                             v.v.forEach(i => {
                                 if(i.id ==  skuData.selectedSkuComb[item]){
                                     skuInfo.item[v.k] =i.name;
+                                    this.initialSku[item] = i.id;
                                     // skuInfo.item.push({[v.k]: i.name,});
                                 }
                             })
@@ -92,6 +93,7 @@ export default {
                         
                     })
                 });
+                skuInfo.initialSku = this.initialSku;
                 params.username=this.username;
                 params.joincart.push(skuInfo);
                 console.log(params);

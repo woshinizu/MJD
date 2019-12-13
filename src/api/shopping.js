@@ -7,11 +7,21 @@ export function getSkuList(id){
     })
 }
 
+//获取全部商品
+export function getAllp(){
+    return http.get('/shopping/allProudct')
+}
+
 //获取购物车信息
 export function getCartList(username){
     return http.get('/shopping/cart',{
         params:{username}
     })
+}
+
+//查询接口
+export function search(option){
+    return http.post('/shopping/search',option)
 }
 
 //加入购物车

@@ -34,7 +34,15 @@
             </div>
         </div>
         <div @click.stop="stop" v-if="show">
-            <sku-list :show="show" @goodsId="goodsId" :type="type" @changeskuShow="changeskuShow" :sku="sku"></sku-list>
+            <sku-list
+                :show="show"
+                @goodsId="goodsId"
+                :type="type"
+                @changeskuShow="changeskuShow"
+                :sku="sku"
+                :initialSku="initialSku"
+            >
+            </sku-list>
         </div>
     </div>
 </template>
@@ -52,7 +60,18 @@ export default {
             goodsId: 2259,
             type: 'edit',
             sku: '',
+            initialSku: this.skuInfo.initialSku || {},
+            //     // 键：skuKeyStr（sku 组合列表中当前类目对应的 key 值）
+            //     // 值：skuValueId（规格值 id）
+            //     s1: '30349', // 规格类目 k_s 为 s1 的对应规格值 id
+            //     s2: '1193', // 规格类目 k_s 为 s2 的对应规格值 id
+            //     s3: '122', // 最多包含3个规格值，为0表示不存在该规格
+            //     // 初始选中数量
+            //     selectedNum: 2
+            // },
         }
+    },
+    created() {
     },
     components: {
         'sku-list':skuList,
