@@ -6,7 +6,7 @@
                 height="100"
                 class="img"
                 radius="5px"
-                src="https://img.yzcdn.cn/vant/cat.jpeg"
+                :src="skuInfo.image"
             />
             <!-- <img class="img" src="../../assets/logo.png" alt="" /> -->
         </div>
@@ -69,11 +69,11 @@ export default {
     },
     methods:{
          showPopup() {
-            getSkuList().then(data => {
+            getSkuList(this.skuInfo.productId).then(data => {
                 if(data.code == 0){
-                    this.sku = data.data[0];
+                    this.sku = data.data;
                     this.show = true;
-                    console.log(this.sku);
+                    console.log(data);
                 } else{
                     Notify({ type: 'danger', message: '请求错误' });
                 }

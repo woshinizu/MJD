@@ -239,10 +239,19 @@ app.post('/sign', function (req, res) {
     })
 })
 
-
+//======================杨洋=====================================
+//获取商品列表
 app.use((req, res, next) => {
-    readFile('./json/skuList.json').then(data => {
-        req.skuList = JSON.parse(data)
+    readFile('./json/productList.json').then(data => {
+        req.productList = JSON.parse(data)
+        next();
+    }).catch(err => res.status(500))
+})
+
+//获取用户购物车列表
+app.use((req, res, next) => {
+    readFile('./json/shopping-cart.json').then(data => {
+        req.cartList = JSON.parse(data)
         next();
     }).catch(err => res.status(500))
 })

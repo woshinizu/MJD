@@ -1,26 +1,28 @@
 <template>
-    <div>
+    <div v-if="sku">
         <div>
             <router-link to="/index/found">
             <van-icon name="arrow-left" class="icon"/>
             </router-link>
         <van-swipe :autoplay="3000" indicator-color="white">
-         
+            <van-swipe-item v-for="(item,index) in sku.goods.main_picture" :key="index">
+                <img :src="item">
+            </van-swipe-item>
+        <!-- <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
         <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
         <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
         <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
         <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
         <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
         <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
-        <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
-        <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item>
+        <van-swipe-item><img src="http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"></van-swipe-item> -->
         </van-swipe>
         <van-icon name="ellipsis" class="san" @click="changeShow"/>
       </div>
         <div class="price">
             <div>
-            <span class="span">￥</span><span class="span1">2199.00</span>
-            <span class="span2">￥2099.00</span>
+            <span class="span">￥</span><span class="span1">{{sku.price}}</span>
+            <span class="span2">￥{{sku.list[0].price}}</span>
             <span class="spanurl"></span>
             <div class="iconBox rt">
                 <van-icon name="gold-coin-o" class="icon1 lt"/>
@@ -36,9 +38,9 @@
             <i>
                 <img src="https://img11.360buyimg.com/jdphoto/s48x28_jfs/t1/69566/30/15738/1062/5dd3abb6Ea8fd7aa3/57c6a72435905414.png">
             </i>
-            荣耀10青春版 幻彩渐变 2400万AI自拍 全网通版4GB+64GB 渐变蓝 移动联通电信4G全面屏手机
+            {{sku.goods.title}}
         </div>
-        <div class="desc">限时优惠899！2400万AI高清自拍，麒麟710处理器，炫光渐变色！荣耀爆品特惠，选品质，购荣耀~ 
+        <div class="desc">{{sku.goods.desc}}
             <router-link to="/look">
                  <a href="#">查看</a>
             </router-link>
@@ -89,8 +91,8 @@
             </ul>
         </div>
       </div>
-      <div class="pic">
-          <img src="https://img30.360buyimg.com/sku/jfs/t1/36741/20/3750/303100/5cb970f7E8d4360c0/300ebf1adf30579f.jpg">
+      <div class="pic" v-for="(item,index) in sku.goods.detail_picture" :key="index">
+          <img :src="item">
       </div>
       <div>
           <van-goods-action>
@@ -115,17 +117,18 @@ export default {
     return {
       current: 0,
       show: false,
-      goodsId: 2259,
+      goodsId: 1,
       type: 'add',
       selectCt: '',
       isShow:false,
       sku: '',
+      id: this.$route.query.productId
     }
     },
     created(){
-        getSkuList().then(data => {
+        getSkuList(this.id).then(data => {
             if(data.code == 0){
-                this.sku = data.data[0];
+                this.sku = data.data;
                 // this.show = true;
                 console.log(this.sku);
             } else{
