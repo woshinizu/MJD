@@ -81,7 +81,7 @@ export default {
           .then(data => {
             if (data.data.code == 0) {
               this.$router.push("/index/home");
-              // localStorage.
+              localStorage.setItem('username',username);
             } else {
               Dialog.alert({
                 title: "⚠️警告",

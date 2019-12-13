@@ -4,25 +4,29 @@
             <van-checkbox
                 label-disabled
                 class="shopName"
-                @click.self="changeShopSelect"
-                v-model="spuInfo.allSelect"
+                v-model="allSelect"
                 checked-color="#FD2607"
             >
                 {{spuInfo.name}}
             </van-checkbox>
-            <template v-for="(item,index) in spuInfo.joincart" >
+            <div
+                v-for="(item,index) in spuInfo.joincart" 
+                :key="item.skuId"
+                @click.stop="clickShop(item.productId)"
+            >
+                <div class="product">
                     <van-checkbox
                         label-disabled
-                        @click.self="changItem"
+                        @click.stop="changItem"
                         v-model="item.isSelect"
                         checked-color="#FD2607"
-                        :key="item.id"
-                        @click="changItem(item.id,item.isSelect)"
+                        class="iss"
                     >
-                        <sku-item :skuInfo="item"></sku-item>
                     </van-checkbox>
+                    <sku-item :skuInfo="item"></sku-item>
+                </div>
                 <van-divider :key="index" v-if=" index != spuInfo.joincart.length-1" />
-            </template>
+            </div>
         <!-- </van-checkbox-group> -->
     </div>
 </template>
@@ -46,9 +50,14 @@ export default {
     computed:{
         allSelect:{
             get(){
-                return this.spuInfo.allSelect
+                return !(this.spuInfo.joincart.some(item => {
+                    console.log(item);
+                    return item.isSelect == false
+                }));
             },
-            set(val){}
+            set(val){
+                this.$emit('shopSelect',this.spuInfo.shopId,val);
+            }
         }
     },
     components: {
@@ -58,14 +67,15 @@ export default {
         showPopup() {
             this.show = true;
         },
-        changeShopSelect(){
-            //点击店铺  前选择按钮  调用父组件方法改变数据
-            console.log(this.spuInfo.shopId,!this.spuInfo.allSelect);
-            this.$emit('shopSelect',this.spuInfo.shopId,!this.spuInfo.allSelect);
+        clickShop(productId){
+            console.log('clickShop');
+            this.$router.push({
+                path: '/details',
+                query: {productId}
+            })
         },
-        changItem(id,select){
-            console.log(id,this.spuInfo.shopId,!select);
-            this.$emit('itemSelect',id,this.spuInfo.shopId,!select);
+        changItem(){
+            console.log('shop');
         }
     },
 }
@@ -77,9 +87,17 @@ export default {
         .shopName{
             font-weight: 600;
             padding: 2vw 0;
+            
         }
         .radio_Box{
             padding: 5vw 2vw 2vw;
         }
+        .product{
+            display: flex;
+            .iss{
+                min-width: 6vw;
+            }
+        }
+        
     }
 </style>
