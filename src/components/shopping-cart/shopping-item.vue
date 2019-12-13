@@ -4,16 +4,15 @@
             <van-checkbox
                 label-disabled
                 class="shopName"
-                @click.stop="changeShopSelect"
-                v-model="spuInfo.allSelect"
+                v-model="allSelect"
                 checked-color="#FD2607"
             >
                 {{spuInfo.name}}
             </van-checkbox>
             <div
                 v-for="(item,index) in spuInfo.joincart" 
-                :key="item.id"
-                @click.stop="clickShop(item.id)"
+                :key="item.skuId"
+                @click.stop="clickShop(item.productId)"
             >
                 <div class="product">
                     <van-checkbox
@@ -21,7 +20,6 @@
                         @click.stop="changItem"
                         v-model="item.isSelect"
                         checked-color="#FD2607"
-                        @click="changItem(item.id,item.isSelect)"
                         class="iss"
                     >
                     </van-checkbox>
@@ -52,9 +50,14 @@ export default {
     computed:{
         allSelect:{
             get(){
-                return this.spuInfo.allSelect
+                return !(this.spuInfo.joincart.some(item => {
+                    console.log(item);
+                    return item.isSelect == false
+                }));
             },
-            set(val){}
+            set(val){
+                this.$emit('shopSelect',this.spuInfo.shopId,val);
+            }
         }
     },
     components: {
@@ -64,21 +67,15 @@ export default {
         showPopup() {
             this.show = true;
         },
-        changeShopSelect(){
-            //点击店铺  前选择按钮  调用父组件方法改变数据
-            console.log(this.spuInfo.shopId,!this.spuInfo.allSelect);
-            this.$emit('shopSelect',this.spuInfo.shopId,!this.spuInfo.allSelect);
-        },
-        changItem(id,select){
-            console.log(id,this.spuInfo.shopId,!select);
-            this.$emit('itemSelect',id,this.spuInfo.shopId,!select);
-        },
-        clickShop(id){
+        clickShop(productId){
             console.log('clickShop');
             this.$router.push({
                 path: '/details',
-                query: {id}
+                query: {productId}
             })
+        },
+        changItem(){
+            console.log('shop');
         }
     },
 }

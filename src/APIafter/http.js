@@ -255,11 +255,41 @@ app.get('/login',function(req,res){
         })
     }
 })
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
 
+// 用户地址接口
+
+// 发现接口
+app.get('/found',function(req,res){
+    if(req.session.userId){
+        res.send({
+            code:0
+        })
+    }
+})
+
+// 分类列表接口
+app.get('/classfy',function(req,res){
+    res.send({
+        code:0,
+        
+    })
+})
+
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
+//======================杨洋=====================================
+//获取商品列表
 app.use((req, res, next) => {
-    readFile('./json/skuList.json').then(data => {
-        req.skuList = JSON.parse(data)
+    readFile('./json/productList.json').then(data => {
+        req.productList = JSON.parse(data)
+        next();
+    }).catch(err => res.status(500))
+})
+
+//获取用户购物车列表
+app.use((req, res, next) => {
+    readFile('./json/shopping-cart.json').then(data => {
+        req.cartList = JSON.parse(data)
         next();
     }).catch(err => res.status(500))
 })
