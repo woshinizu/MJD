@@ -24,7 +24,7 @@ app.use((req, res, next) => {
         req.homeData = JSON.parse(data)
         next();
     }).catch(err => res.status(500))
-    
+
 })
 
 
@@ -147,9 +147,9 @@ app.post('/index/my', function (req, res) {
             code: 0,
             data: Object.values(data),
             userdata: req.session.userId,
-            img:req.hdImg
+            img: req.hdImg
         })
-    }else{
+    } else {
         res.send({
             code: 1,
             // data: Object.values(data),
@@ -177,7 +177,7 @@ app.post('/sign', function (req, res) {
         return;
     }
     data.push(req.body);
-    writeFile('./user.json', JSON.stringify(data)).then(data => {
+    writeFile('./json/user.json', JSON.stringify(data)).then(data => {
         // 写入成功
         res.send({
             code: 0,
@@ -200,7 +200,7 @@ app.post('/setting', function (req, res) {
         res.send({
             code: 0,
             userdata: req.session.userId,
-            img:req.hdImg
+            img: req.hdImg
         })
     }
 })
@@ -243,15 +243,15 @@ app.post('/sign', function (req, res) {
 
 // 首页请求接口
 
-app.get('/login',function(req,res){
+app.get('/login', function (req, res) {
     console.log('这行代码执行了')
     if (req.session.userId) {
         res.send({
             code: 0
         })
-    }else{
+    } else {
         res.send({
-            msg:'请求失败'
+            msg: '请求失败'
         })
     }
 })
@@ -259,21 +259,42 @@ app.get('/login',function(req,res){
 // 用户地址接口
 
 // 发现接口
-app.get('/found',function(req,res){
-    if(req.session.userId){
+app.get('/found', function (req, res) {
+    if (req.session.userId) {
         res.send({
-            code:0
+            code: 0
         })
     }
 })
 
+
 // 分类列表接口
-app.get('/classfy',function(req,res){
-    res.send({
-        code:0,
-        
+app.use((req,res,next)=>{
+    readFile('./json/classfy.json').then(data=>{
+        req.cla = JSON.parse(data.toString())
+        next()
+        return req.cla
     })
 })
+
+app.get('/classfy', function (req, res) {
+    res.send({
+        code: 0,
+        data:req.cla
+    })
+})
+
+
+// 购物车登录态接口
+app.get('/shopcat', function (req, res) {
+    if (req.session.userId) {
+        res.send({
+            code: 0
+        })
+    }
+})
+
+
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
@@ -295,8 +316,8 @@ app.use((req, res, next) => {
 })
 
 app.use('/shopping', require('./routes/shopping'));
-app.use((req,res)=>{
+app.use((req, res) => {
     res.status(404),
-    res.send('asd')
+        res.send('asd')
 
 })

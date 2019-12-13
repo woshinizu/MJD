@@ -119,6 +119,7 @@ export default {
           // this.des = data.userdata;
           this.flag = true;
           this.pic = false;
+          localStorage.removeItem('username');
 
         }
         this.ary = data.data;
