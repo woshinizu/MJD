@@ -18,7 +18,7 @@
 
 
     <div class="footer">
-        <div class="not-concern">
+        <div class="not-concern"> 
             <img src="../../assets/not-concern.jpg">
         </div>
         <div class="like">

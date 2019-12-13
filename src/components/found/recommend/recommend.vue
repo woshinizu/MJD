@@ -160,7 +160,7 @@ export default {
     },
     add() {},
     followe(){
-
+      
     }
   }
 };

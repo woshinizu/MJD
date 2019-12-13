@@ -9,7 +9,10 @@
                 <router-link to="/particulars" tag="p">
                      <p>荣耀京东自营旗舰店</p>
                 </router-link>
+                <router-link to="/details" tag="span">
                 <span>京东自营</span>
+                </router-link>
+                
             </div>
             <van-button icon="star-o" type="primary" class="button">关注有礼</van-button>
             
