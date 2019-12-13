@@ -34,6 +34,14 @@ route.get('/shop', (req, res) => {
     })
 });
 
+//=>获取所有店铺
+route.get('/allShop', (req, res) => {
+    res.send({
+        code: 0,
+        data: req.productList,
+    })
+});
+
 
 //=>获取购物车详细信息
 route.get('/cart', (req, res) => {
@@ -115,6 +123,34 @@ route.post('/addCart', (req, res) => {
 	});
 })
 
+
+//编辑购物车
+route.post('/editCart', (req, res) => {
+    let { username, shopId, joincart} = req.body;
+    req.cartList[username] = req.cartList[username].map(item => {
+        if(item.shopId == shopId){
+            item.joincart.map(value => {
+                if(value.skuId == joincart[0].skuId){
+                    value = joincart[0];
+                }
+                return value;
+            })
+        }
+        return item;
+    });
+    writeFile('./json/shopping-cart.json', JSON.stringify(req.cartList)).then(() => {
+		res.send({
+            code: 0,
+            data: req.cartList,
+            message: "编辑成功"
+        });
+	}).catch(() => {
+		res.send({
+            code: 0,
+            message: "编辑失败"
+        });
+	});
+})
 route.post('/creatOrder', (req, res) => {
     console.log(req.body);
 })
