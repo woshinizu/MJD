@@ -175,6 +175,7 @@ app.post('/sign', function (req, res) {
         return;
     }
     data.push(req.body);
+    console.log('000', JSON.stringify(data));
     writeFile('./user.json', JSON.stringify(data)).then(data => {
         // 写入成功
         res.send({
