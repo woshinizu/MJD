@@ -6,6 +6,7 @@ import sign from '../views/sign.vue'
 import setting from '../views/setting.vue'
 import update from '../views/update.vue'
 // import Password from './my/se'nnguyjhbmn
+import myOrder from '../components/my/myOrder.vue'
 import home from './home/home'
 import found from './found/found'
 import classification from './classification/classification'
@@ -26,6 +27,13 @@ import bianji from '../views/bianji.vue'
 
 import setPassword from '@/views/Password/setPassword.vue'
 
+import lmxAll from '@/components/my/LMX/lmxAll.vue'
+import cancel from '@/components/my/LMX/cancel.vue'
+import done from '@/components/my/LMX/done.vue'
+import wait from '@/components/my/LMX/wait.vue'
+import waitHUO from '@/components/my/LMX/waitHUO.vue'
+import doneC from '@/components/my/LMX/doneC.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,7 +42,7 @@ const routes = [
     name: 'index',
     component: index,
     redirect: '/index/home',
-    children:home.concat(found,classification,my,shoppingcart)
+    children: home.concat(found, classification, my, shoppingcart)
   },
   {
     path: '/login',
@@ -61,35 +69,35 @@ const routes = [
     name:'details',
     component:details,
 
-},{
-    path:'/search',
-    name:'search',
-    component:Search,
+  }, {
+    path: '/search',
+    name: 'search',
+    component: Search,
   },
   {
-    path:'/searchList',
-    name:'searchList',
-    component:SearchList
+    path: '/searchList',
+    name: 'searchList',
+    component: SearchList
   },
   {
-    path:'/adr',
-    name:'adr',
-    component:adr
+    path: '/adr',
+    name: 'adr',
+    component: adr
   },
   {
-    path:'/newAdd',
-    name:'newAdd',
-    component:newAdd
+    path: '/newAdd',
+    name: 'newAdd',
+    component: newAdd
   },
   {
-    path:'/bianji',
-    name:'bianji',
-    component:bianji
+    path: '/bianji',
+    name: 'bianji',
+    component: bianji
   },
-    {
-    path:'/look',
-    name:'look',
-    component:look
+  {
+    path: '/look',
+    name: 'look',
+    component: look
   },
   {
     path:'/homePage',
@@ -113,22 +121,64 @@ const routes = [
           path:'/homePage/sort',
           component:() => import(/* webpackChunkName: "sort" */ '../components/found/recommend/sort.vue')
       },
+    ]},
+    {
+    path: '/homePage',
+    name: 'homePage',
+    component: homePage
+  },
+  {
+    path: '/particulars',
+    name: 'particulars',
+    component: particulars
+  },
+  {
+    path: '/placeOrder',
+    name: 'placeOrder',
+    component: placeOrder,
+  },
+  {
+    path: '/setPassword',
+    name: 'setPassword',
+    component: setPassword,
+  }, {
+    path: '/myOrder',
+    name: 'myOrder',
+    component: myOrder,
+    redirect:'/myOrder/lmxAll',
+    children: [
+      {
+        path: '/myOrder/lmxAll',
+        name: 'lmxAll',
+        component: lmxAll
+      },
+      {
+        path: '/myOrder/wait',
+        name: 'wait',
+        component: wait
+      },
+      {
+        path: '/myOrder/waitHUO',
+        name: 'waitHUO',
+        component: waitHUO
+      },
+      {
+        path: '/myOrder/done',
+        name: 'done',
+        component: done
+      },
+      {
+        path: '/myOrder/cancel',
+        name: 'cancel',
+        component: cancel
+      },
+      
     ]
   },
   {
-    path:'/particulars',
-    name:'particulars',
-    component:particulars
-  },
-  {
-    path:'/placeOrder',
-    name:'placeOrder',
-    component:placeOrder,
-  },
-  {
-    path:'/setPassword',
-    name:'setPassword',
-    component:setPassword,
+    path: '/doneC',
+    name: 'doneC',
+    component: doneC
   }
 ]
 

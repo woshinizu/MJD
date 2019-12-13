@@ -101,7 +101,7 @@ export default {
   },
   methods: {
     bk(){
-      this.$router.back()
+      this.$router.push('/index/my')
     },
     clcookie() {},
     cleLocal() {

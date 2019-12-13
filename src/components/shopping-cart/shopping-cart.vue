@@ -46,7 +46,7 @@
 // @ is an alias to /src
 import shoppingItem from '@/components/shopping-cart/shopping-item';
 import total from '@/components/shopping-cart/total';
-import { getCartList } from '@/api/shopping.js';
+import { getCartList, getLogin  } from '@/api/shopping.js';
 export default {
     name: 'shoppingcart',
     data() {
@@ -76,6 +76,9 @@ export default {
         }
     },
     created(){
+        // getLogin().then(data => {
+        //     console.log(data);
+        // })
         getCartList(this.username).then(data => {
             console.log(data);
             if(data.code == 0){

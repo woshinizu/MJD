@@ -84,7 +84,7 @@ export default {
   components: {}
 };
 </script>
-<style lang="less" scope>
+<style lang="less" scoped>
 .barBox {
   .van-sidebar {
     height: 80vh;
@@ -92,6 +92,7 @@ export default {
 }
 .searchLMX > .van-search {
   height: 11vh;
+  z-index: 9999;
   background: rgb(228, 60, 31) !important;
 }
 .van-tree-select__content {
@@ -99,6 +100,9 @@ export default {
 }
 .van-grid-item__content--center {
   width: 21vw;
+}
+.van-grid{
+  height: 60vh;
 }
 .four {
   margin: 4vw 0 1.5vh 2.5vw;
