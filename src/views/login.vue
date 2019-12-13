@@ -1,11 +1,9 @@
 <template>
   <div>
     <van-cell-group>
-      <router-link to="">
       <div class="ico" @click="back">
         <van-icon name="arrow-left" />
       </div>
-      </router-link>
       
       <div class="imgbox"></div>
       <van-field
