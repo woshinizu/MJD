@@ -96,10 +96,15 @@ export default {
                 params.joincart.push(skuInfo);
                 console.log(params);
                 addCart(params).then(data => {
-                    console.log(data);
+                    if(data.code == 0){
+                        this.$emit('changeskuShow')
+                        this.$toast("加入购物车成功！")
+                    } else{
+                        this.$notify({ type: 'danger', message: '请求错误' });
+                    }
                 })
             } else if(this.type == 'edit'){
-                this.$emit('changeShow',skuData.selectedSkuComb.id)
+                this.$emit('changeskuShow',skuData.selectedSkuComb.id)
             }
         },
         close(){
