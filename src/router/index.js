@@ -4,6 +4,7 @@ import index from '../views/index.vue'
 import login from '../views/login.vue'
 import sign from '../views/sign.vue'
 import setting from '../views/setting.vue'
+import update from '../views/update.vue'
 import home from './home/home'
 import found from './found/found'
 import classification from './classification/classification'
@@ -42,6 +43,11 @@ const routes = [
     path: '/setting',
     name: 'setting',
     component: setting
+  },
+  {
+    path: '/update',
+    name: 'update',
+    component: update
   },
   {
     path:'/details',

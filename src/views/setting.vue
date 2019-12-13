@@ -9,7 +9,7 @@
     <div class="first">
       <div class="login">
         <div class="imgbox"  v-for="v in arr"  :style="{backgroundImage:`url(${v.pic})`}" :key="v.pic"></div>
-        <div class="lower"></div>
+        <div class="lower" v-if="pic"></div>
         <div class="rt" v-if="flag">
           <span>
             <router-link to="/login">登录/</router-link>
@@ -18,12 +18,14 @@
             <router-link to="/sign">注册</router-link>
           </span>
         </div>
-        <div class="els" v-else>
+        <div class="els" v-else >
           <span>用户名：{{des}}</span>
         </div>
-        <div class="icon">
+        <router-link to="/update">
+        <div class="icon" >
           <van-icon name="arrow" color="#909399" />
         </div>
+        </router-link>
       </div>
       <div class="adr">
         <span>
@@ -47,7 +49,7 @@
         </div>
       </div>
       <div class="clear" @click="clcookie">
-        <span>清除缓存</span>
+        <span>清除本地缓存</span>
       </div>
     </div>
     <div class="third">
@@ -74,7 +76,8 @@ export default {
   data() {
     return {
       flag: true,
-      arr:[]
+      arr:[],
+      pic:true
     };
   },
   components: {},
@@ -115,6 +118,7 @@ export default {
         if (data.code == 0) {
           // this.des = data.userdata;
           this.flag = true;
+          this.pic = false;
 
         }
         this.ary = data.data;

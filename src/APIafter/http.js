@@ -28,6 +28,8 @@ app.use((req, res, next) => {
     
 })
 
+
+// 尚帅
 /* app.use((req, res, next) => {
     let strshang = '';
     req.on('data', (chunkshang) => {
@@ -228,7 +230,7 @@ app.post('/index', function (req, res) {
 })
 
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
+// 注册接口
 app.post('/sign', function (req, res) {
     readFile('./json/user.json').then(data => {
         data = JSON.parse(data);
@@ -241,6 +243,21 @@ app.post('/sign', function (req, res) {
     })
 })
 
+// 首页请求接口
+
+app.get('/login',function(req,res){
+    console.log('这行代码执行了')
+    if (req.session.userId) {
+        res.send({
+            code: 0
+        })
+    }else{
+        res.send({
+            msg:'请求失败'
+        })
+    }
+})
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
 
 
 

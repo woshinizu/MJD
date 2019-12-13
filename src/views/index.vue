@@ -32,7 +32,7 @@
       <div>
         <router-link to="/index/my">
           <van-icon name="user-o" />
-          <div>我的</div>
+          <div>{{text?"我的":"未登录"}}</div>
         </router-link>
       </div>
     </nav>
@@ -44,11 +44,17 @@ import axios from 'axios'
 export default {
   data() {
     return {
-
+text:false
     };
   },
   created() {
-
+axios.get('/login').then(data=>{
+  console.log('index',data)
+  if(data.data.code==0){
+    console.log('index',data)
+this.text = true
+  }
+})
   },
   components: {
   },
