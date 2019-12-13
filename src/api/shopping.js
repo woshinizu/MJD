@@ -15,3 +15,7 @@ export function getCartList(username){
 export function addCart(option){
     return http.post('/shopping/addCart',option)
 }
+
+export function getLogin(){
+    return http.get('/shopcat')
+}
