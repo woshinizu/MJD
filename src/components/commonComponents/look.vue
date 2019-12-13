@@ -1,7 +1,7 @@
 <template>
     <div>
         <header>
-            <router-link to="/details"><van-icon name="arrow-left" class="left"/></router-link>
+            <router-link to="/details?productId=1"><van-icon name="arrow-left" class="left"/></router-link>
             <span>5G新品上市</span>
             <router-link to="/index/classification">
             <van-icon name="apps-o" class="right1"/>
