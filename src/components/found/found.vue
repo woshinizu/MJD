@@ -18,21 +18,13 @@
 
 
     <div class="footer">
-        <div class="not-concern">
+        <div class="not-concern"> 
             <img src="../../assets/not-concern.jpg">
         </div>
         <div class="like">
             <h5 class="lt">猜你喜欢</h5>
             <van-icon name="warning-o" class="rt" @click="add"/>
         </div>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
-        <recommend></recommend>
         <recommend></recommend>
     </div>
 </div>

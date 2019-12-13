@@ -12,7 +12,7 @@
             <div>合计: <span class="num">￥{{totalPrice.toFixed(2)}}</span></div>
         </div>
         <div class="btnBox">
-            <van-button v-show="!type" class="btn" color="#FD2607" round>去结算</van-button>
+            <van-button v-show="!type" class="btn" color="#FD2607" round @click="submit">去结算</van-button>
             <van-button v-show="type" class="btn" round>删除</van-button>
         </div>
     </div>
@@ -33,6 +33,9 @@ export default {
     methods:{
         change(){
             this.$emit('allSelect',!this.selectAll)
+        },
+        submit(){
+            this.$router.push('/placeOrder');
         }
     }
 }

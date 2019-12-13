@@ -89,7 +89,9 @@
             </ul>
         </div>
       </div>
-      
+      <div class="pic">
+          <img src="https://img30.360buyimg.com/sku/jfs/t1/36741/20/3750/303100/5cb970f7E8d4360c0/300ebf1adf30579f.jpg">
+      </div>
       <div>
           <van-goods-action>
             <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon" />
@@ -100,12 +102,13 @@
             <van-goods-action-button type="danger" text="立即购买" @click="onClickBuyButton" />
             </van-goods-action>
       </div>
-      <sku-list :show="show" @goodsId="goodsId" :type="type" @changeskuShow="changeskuShow"></sku-list>
+      <sku-list v-if="show" :sku="sku" :show="show" :goodsId="goodsId" :type="type" @changeskuShow="changeskuShow"></sku-list>
     </div>
 </template>
 <script>
 // @ is an alias to /src
 import skuList from '@/components/commonComponents/skuList.vue'
+import { getSkuList } from "@/api/shopping.js"
 export default {
     name: 'details1',
     data() {
@@ -116,7 +119,19 @@ export default {
       type: 'add',
       selectCt: '',
       isShow:false,
+      sku: '',
     }
+    },
+    created(){
+        getSkuList().then(data => {
+            if(data.code == 0){
+                this.sku = data.data[0];
+                // this.show = true;
+                console.log(this.sku);
+            } else{
+                Notify({ type: 'danger', message: '请求错误' });
+            }
+        })
     },
     methods: {
         onChange(index) {
@@ -313,5 +328,9 @@ export default {
     right: 29px;
     transform: rotate(-90deg);
     color: rgba(0,0,0,0.5);
+}
+.pic{
+    width: 92vw;
+    margin: 0 4vw;
 }
 </style>

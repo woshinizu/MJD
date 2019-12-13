@@ -120,7 +120,9 @@ export default {
     "my-main": Main
   },
   computed: {},
-  methods: {}
+  methods: {
+    
+  }
 };
 </script>
 <style lang="less" >

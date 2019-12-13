@@ -1,0 +1,75 @@
+[
+    {
+        "productId": "1",
+        "tree": [
+            {
+                "k": "颜色", 
+                "k_s": "s1",
+                "v": [
+                        {
+                            "id": "30349", 
+                            "name": "红色", 
+                            "imgUrl": "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg", 
+                            "previewImgUrl": "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"
+                        },
+                        {
+                            "id": "1215",
+                            "name": "蓝色", 
+                            "imgUrl": "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg",
+                            "previewImgUrl": "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg"
+                        }
+                    ]
+            },
+            {
+                "k": "大小", 
+                "v": [
+                    { "id": "30350",  "name": "512G" },
+                    { "id": "1193", "name": "1T" }
+                ],
+                "k_s": "s2"
+            },
+            {
+                "k": "cpu", 
+                "v": [
+                    { "id": "122",  "name": "i7" },
+                    { "id": "123", "name": "15" }
+                ],
+                "k_s": "s3"
+            }
+        ],
+        "list": [
+            {
+                "id": 2259,
+                "price": 1000,
+                "s1": "30349",
+                "s2": "1193",
+                "s3": "122",
+                "stock_num": 110
+            },
+            {
+                "id": 2260,
+                "price": 2000,
+                "s1": "1215",
+                "s2": "30350",
+                "s3": "123",
+                "stock_num": 20
+            }
+        ],
+        "price": "1.00",
+        "stock_num": 227,
+        "collection_id": 2261,
+        "none_sku": false,
+        "hide_stock": false,
+        "goods": {
+            "title": "荣耀10青春版 幻彩渐变 2400万AI自拍 全网通版4GB+64GB 渐变蓝 移动联通电信4G全面屏手机",
+            "picture": [
+                "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg",
+                "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg",
+                "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg",
+                "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg",
+                "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg",
+                "http://img2.imgtn.bdimg.com/it/u=3756254732,4064333062&fm=11&gp=0.jpg",
+            ]
+        }
+    }
+]
