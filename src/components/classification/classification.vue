@@ -17,7 +17,7 @@
         <div class="commodityLMX">
           <h4  class="four">热门推荐</h4>
           <van-grid :gutter="10">
-            <van-grid-item v-for="value in 8" :key="value" icon="photo-o" text="文字" />
+            <van-grid-item v-for="value in 50" :key="value" icon="photo-o" text="文字" />
           </van-grid>
         </div>
       </div>
@@ -324,20 +324,31 @@ export default {
 </script>
 <style lang="less" scope>
 .barBox{
+  // position: relative;
     .van-sidebar{
         height: 80vh;
     }
 }
+.searchLMX{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+}
 .searchLMX>.van-search {
   height: 11vh;
+  z-index: 9999;
   background: rgb(228, 60, 31) !important;
-  
 }
 .van-tree-select__content {
   flex: 3;
 }
 .van-grid-item__content--center {
   width: 21vw;
+}
+.van-grid{
+  height: 60vh;
 }
 .four {
   margin:4vw 0 1.5vh 2.5vw;

@@ -61,10 +61,10 @@
         </span>
       </li>
       <li>
-        <div>
+        <div @click="order">
           <van-icon name="orders-o" size="1.4em" color="tomato" />
         </div>
-        <span>我的订单</span>
+      <span>我的订单</span>  
       </li>
     </ul>
     <ul class="bod">
@@ -211,6 +211,9 @@ export default {
     //   // 此时可以自行将文件上传至服务器
     //   console.log(file);
     // }
+    order(){
+      this.$router.push("/myOrder")
+    },
     replay() {
       // 请求一下页面
     }
