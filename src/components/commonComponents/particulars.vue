@@ -26,8 +26,13 @@
                 <p>收藏</p>
             </div>
         </div>
-        <div>
-            
+        <div class="Description">
+            <div class="lt">店铺简介</div>
+            <div class="rt">荣耀京东自营旗舰店</div>
+        </div>
+        <div class="tlt">
+            <div class="lt">店铺时间</div>
+            <div class="rt">2015年02月28日</div>
         </div>
     </div>
 </template>
@@ -106,6 +111,20 @@ export default {
             }
         }
     }
+    .Description{
+            width: 100%;
+            height: 15vw;
+            background: #fff;
+            line-height: 15vw;
+            margin-top: 10vw;
+            border-bottom: 1px solid #464242;
+    }
+    .tlt{
+            width: 100%;
+            height: 15vw;
+            background: #fff;
+            line-height: 15vw;
+    }
     .iconbox{
         .icon{
             margin-top:3vw;
@@ -113,6 +132,10 @@ export default {
         >p{
             font-size: 1vw;
         }
+    }
+    .rt{
+        float: right;
+        color: #a59c9c;
     }
     
 }
