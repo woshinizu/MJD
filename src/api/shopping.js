@@ -14,4 +14,4 @@ export function getCartList(username){
 
 export function addCart(option){
     return http.post('/shopping/addCart',option)
-}
+}  

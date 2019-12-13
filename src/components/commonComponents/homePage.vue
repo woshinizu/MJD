@@ -9,7 +9,7 @@
                 <router-link to="/particulars" tag="p">
                      <p>荣耀京东自营旗舰店</p>
                 </router-link>
-                <router-link to="/details" tag="span">
+                <router-link to="/details?productId=1" tag="span">
                 <span>京东自营</span>
                 </router-link>
                 

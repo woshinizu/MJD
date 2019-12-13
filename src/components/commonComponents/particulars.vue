@@ -6,8 +6,6 @@
                     <van-icon name="arrow-left" />
                 </div>
             </router-link>
-            
-            
             <span class="lt">店铺详情</span>
             <div class="icon2">
                  <van-icon name="ellipsis" />

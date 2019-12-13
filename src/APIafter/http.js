@@ -24,7 +24,6 @@ app.use((req, res, next) => {
         req.homeData = JSON.parse(data)
         next();
     }).catch(err => res.status(500))
-    
 })
 
 /* app.use((req, res, next) => {
@@ -226,7 +225,14 @@ app.post('/index', function (req, res) {
     }
 })
 
-
+// 发现接口
+app.get('/found',function(req,res){
+    if(req.session.userId){
+        res.send({
+            code:0
+        })
+    }
+})
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
 app.post('/sign', function (req, res) {
     readFile('./json/user.json').then(data => {
