@@ -35,10 +35,12 @@
 </template>
 <script>
 // @ is an alias to /src
+import {getShop} from '@/api/shopping'
 export default {
   name: "recommend",
   data() {
     return {
+      shopId:this.$route.query.shopId||'',
       arr:[
         {
           img:'//img13.360buyimg.com/cms/jfs/t1/7612/15/4826/4894/5bdbee52E3beb1314/3a4a0a5cddabfa59.jpg!q70.dpg.webp',
@@ -154,6 +156,13 @@ export default {
         }
       ]
     };
+  },
+  created() {
+    getShop().then(data=>{
+      if(data.code==0){
+        this.shop = data.shopId
+      }
+    })
   },
   components: {},
   methods: {

@@ -1,11 +1,9 @@
 <template>
     <div class="all">
         <div class="herder">
-            <router-link to="/homePage/head">
-                <div class="icon1 lt">
+                <div class="icon1 lt" @click="change">
                     <van-icon name="arrow-left" />
                 </div>
-            </router-link>
             <span class="lt">店铺详情</span>
             <div class="icon2">
                  <van-icon name="ellipsis" />
@@ -13,10 +11,10 @@
         </div>
         <div class="logo">
             <div class="lt img">
-                <img src="//img13.360buyimg.com/cms/jfs/t1/7612/15/4826/4894/5bdbee52E3beb1314/3a4a0a5cddabfa59.jpg">
+                <img :src="shop.image">
             </div>
             <div class="center lt">
-                <h2>华为荣耀官方旗县店</h2>
+                <h2>{{shop.name}}</h2>
                 <p>自营</p>
             </div>
             <div class="iconbox">
@@ -26,21 +24,45 @@
         </div>
         <div class="Description">
             <div class="lt">店铺简介</div>
-            <div class="rt">荣耀京东自营旗舰店</div>
+            <div class="rt">{{shop.deac}}</div>
         </div>
         <div class="tlt">
             <div class="lt">店铺时间</div>
-            <div class="rt">2015年02月28日</div>
+            <div class="rt">{{shop.start}}</div>
         </div>
     </div>
 </template>
 <script>
 // @ is an alias to /src
+
+import {getShop} from '@/api/shopping'
 export default {
     name: 'particulars',
     data() {
         return {
-        
+        shop:'',
+        shopId:this.$route.query.shopId || '',
+        }
+    },
+    created() {
+        console.log(this.$route)
+        getShop(this.shopId).then(data=>{
+            if(data.code==0){
+                this.shop = data.data
+                console.log(this.shop)
+            }else{
+                Notify({ type: 'danger', message: '请求错误' })
+            }
+        })
+    },
+    methods: {
+        change(){
+            this.$router.push({
+                path:'/homePage/head',
+                query:{
+                    shopId:this.shopId
+                }
+            })
         }
     },
     components: {

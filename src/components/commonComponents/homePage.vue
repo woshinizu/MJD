@@ -3,15 +3,11 @@
         
         <header>
             <div class="img lt">
-                <img src="//img11.360buyimg.com/cms/jfs/t1/6997/27/5197/8479/5bdbedb6Eb8e2ff7f/ebc913b8c18a58e0.jpg">
+                <img :src="shop.header">
             </div>
-            <div class="til lt">
-                <router-link to="/particulars" tag="p">
-                     <p>荣耀京东自营旗舰店</p>
-                </router-link>
-                <router-link to="/details?productId=1" tag="span">
+            <div class="til lt"  @click="addChange">
+                     <p>{{shop.name}}</p>
                 <span>京东自营</span>
-                </router-link>
                 
             </div>
             <van-button icon="star-o" type="primary" class="button">关注有礼</van-button>
@@ -30,13 +26,13 @@
         </div>
         <router-view></router-view>
         </van-tabs>
-        <van-tabbar v-model="active">
+        <van-tabbar v-model="active" @change="onchange">
         <van-tabbar-item icon="shop-o" 
             v-for="item in ary"
             :key="item.id"
-            :to="item.to"
             :title="item.til"
             :icon="item.icon"
+            
         >
         {{item.til}}
         </van-tabbar-item>
@@ -47,12 +43,16 @@
 </template>
 <script>
 // @ is an alias to /src
+
+import {getShop} from '@/api/shopping'
 export default {
     name: 'XXX',
     data() {
         return {
         value:'',
         active:0,
+        shop:'',
+        shopId:this.$route.query.shopId || '',
         ary:[
             {til:'首页',to:'/homePage/head',icon:'shop-o',id:1},
             {til:'全部商品',to:'/homePage/allcommodity',icon:'bag',id:2},
@@ -60,9 +60,39 @@ export default {
             {til:'分类',to:'/homePage/sort',icon:'apps-o',id:4}]
         }
     },
+    created() {
+         console.log(this.$route)
+        getShop(this.shopId).then(data=>{
+            if(data.code==0){
+                this.shop = data.data
+                console.log(this.shop)
+            }else{
+                Notify({ type: 'danger', message: '请求错误' })
+            }
+        })
+    },
     methods: {
         onSearch(){
 
+        },
+        addChange(){
+            console.log(this.shop.shopId)
+            this.$router.push({
+                path:'/particulars',
+                query:{
+                    shopId:this.shop.shopId
+                }
+            })
+        },
+        
+        onchange(index){
+            console.log(index);
+            this.$router.push({
+                path:this.ary[index].to,
+                query:{
+                    shopId:this.shopId
+                }
+            })
         }
     },
     components: {

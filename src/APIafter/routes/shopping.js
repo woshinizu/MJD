@@ -23,6 +23,18 @@ route.get('/proudct', (req, res) => {
     })
 });
 
+
+//=>获取店铺详细信息
+route.get('/shop', (req, res) => {
+    let { shopId = 0 } = req.query;
+    let shopData = req.productList.find( item => item.shopId == shopId);
+    res.send({
+        code: 0,
+        data: shopData,
+    })
+});
+
+
 //=>获取购物车详细信息
 route.get('/cart', (req, res) => {
     let { username = '' } = req.query;
@@ -102,5 +114,10 @@ route.post('/addCart', (req, res) => {
         });
 	});
 })
+
+route.post('/creatOrder', (req, res) => {
+    console.log(req.body);
+})
+
 
 module.exports = route;
