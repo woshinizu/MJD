@@ -29,7 +29,7 @@ export default {
             quota: 0,
             quotaUsed: 0,
             username: localStorage.getItem('username') || '',
-            // initialSku: {
+            initialSku: {},
             //     // 键：skuKeyStr（sku 组合列表中当前类目对应的 key 值）
             //     // 值：skuValueId（规格值 id）
             //     s1: '30349', // 规格类目 k_s 为 s1 的对应规格值 id
@@ -73,6 +73,7 @@ export default {
                 skuInfo.skuId= skuData.selectedSkuComb.id;
                 skuInfo.title= this.sku.goods.title;
                 skuInfo.price= this.sku.list.find(item => item.id = skuInfo.skuId).price;
+                this.initialSku = this.initialSku || {};
                 skuInfo.num = this.initialSku.selectedNum = skuData.selectedNum;
                 skuInfo.isSelect=false;
                 skuInfo.item = {};

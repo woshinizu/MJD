@@ -58,6 +58,7 @@ export default {
     },
     computed:{
         totalPrice(){
+            this.shoppingList = this.shoppingList || [];
             return this.shoppingList.reduce((prev,next) => {
                 let sum = next.joincart.reduce((p,n) => {
                     return p+(n.isSelect ? n.price*n.num : 0)

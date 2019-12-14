@@ -6,9 +6,9 @@
                 class="shopName"
                 v-model="allSelect"
                 checked-color="#FD2607"
-                @click.stop="goShop"
+                
             >
-                {{spuInfo.name}}
+                <div @click.stop="goShop">{{spuInfo.name}}</div>
             </van-checkbox>
             <div
                 v-for="(item,index) in spuInfo.joincart" 
