@@ -24,10 +24,7 @@ app.use((req, res, next) => {
         req.homeData = JSON.parse(data)
         next();
     }).catch(err => res.status(500))
-<<<<<<< HEAD
-=======
 
->>>>>>> bae5a14dd9931ff47264a983a5e7b8832cd159cf
 })
 
 
@@ -231,7 +228,6 @@ app.post('/index', function (req, res) {
     }
 })
 
-<<<<<<< HEAD
 // 发现接口
 app.get('/found',function(req,res){
     if(req.session.userId){
@@ -241,10 +237,8 @@ app.get('/found',function(req,res){
     }
 })
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
-=======
 
 // 注册接口
->>>>>>> bae5a14dd9931ff47264a983a5e7b8832cd159cf
 app.post('/sign', function (req, res) {
     readFile('./json/user.json').then(data => {
         data = JSON.parse(data);
