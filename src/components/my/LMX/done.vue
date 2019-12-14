@@ -51,7 +51,7 @@ export default {
   components: {}
 };
 </script>
-<style lang="less"scoped>
+<style lang="less" scoped>
 .done {
   margin-top: 1.5vh;
   background: rgb(255, 254, 254);

@@ -228,14 +228,24 @@ app.post('/index', function (req, res) {
     }
 })
 
-// 发现接口
-app.get('/found',function(req,res){
-    if(req.session.userId){
-        res.send({
-            code:0
-        })
-    }
+
+// 分类列表接口
+app.use((req,res,next)=>{
+    readFile('./json/classfy.json').then(data=>{
+        req.cla = JSON.parse(data.toString())
+        next()
+        return req.cla
+    })
 })
+
+app.get('/classfy', function (req, res) {
+    res.send({
+        code: 0,
+        data:req.cla
+    })
+})
+
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
 
 // 注册接口

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <div class="searchLMX" style=" background: red;box-sizing:border-box">
       <van-search v-model="value" placeholder="请输入搜索关键词" shape="round"></van-search>
     </div>
@@ -36,7 +36,8 @@ export default {
       value: "",
       items: [],
       activeId: 1,
-      activeIndex: 0
+      activeIndex: 0,
+      items: []
     };
   },
   methods: {
@@ -92,17 +93,15 @@ export default {
 }
 .searchLMX > .van-search {
   height: 11vh;
-  z-index: 9999;
   background: rgb(228, 60, 31) !important;
 }
 .van-tree-select__content {
   flex: 3;
 }
+
+
 .van-grid-item__content--center {
   width: 21vw;
-}
-.van-grid{
-  height: 60vh;
 }
 .four {
   margin: 4vw 0 1.5vh 2.5vw;
@@ -111,3 +110,4 @@ export default {
   box-sizing: border-box;
 }
 </style>
+
