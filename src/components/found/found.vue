@@ -18,12 +18,12 @@
 
 
     <div class="footer">
-        <div class="not-concern"> 
+        <div class="not-concern" v-if="isshow"> 
 
-            <van-button type="primary" v-if="isshow" class="denglu" @click="changeL">未登录</van-button>
-            <img src="../../assets/not-concern.jpg" v-else>
+            <van-button type="primary"  class="denglu" @click="changeL">未登录</van-button>
+            <!-- <img src="../../assets/not-concern.jpg" v-else> -->
         </div>
-        <div class="like">
+        <div class="like" v-else>
             <h5 class="lt">猜你喜欢</h5>
             <van-icon name="warning-o" class="rt" @click="add"/>
         </div>

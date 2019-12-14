@@ -114,7 +114,7 @@ export default {
   height: 30vw;
   margin: 15vw auto;
   border-radius: 50%;
-  background-image: url("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2468770489,773317773&fm=26&gp=0.jpg");
+  background-image: url("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2468770489,773317773&fm=26&gp=0.jpg ");
   background-size: cover;
   background-position: center center;
   > img {

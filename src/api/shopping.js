@@ -35,3 +35,7 @@ export function getShop(shopId){
         params:{shopId}
     })
 }
+
+export function getallShop(){
+    return http.get('/shopping/allShop')
+}

@@ -4,6 +4,7 @@ import index from '../views/index.vue'
 import login from '../views/login.vue'
 import sign from '../views/sign.vue'
 import setting from '../views/setting.vue'
+import update from '../views/update.vue'
 // import Password from './my/se'nnguyjhbmn
 import myOrder from '../components/my/myOrder.vue'
 import home from './home/home'
@@ -59,9 +60,14 @@ const routes = [
     component: setting,
   },
   {
-    path: '/details',
-    name: 'details',
-    component: details,
+    path: '/update',
+    name: 'update',
+    component: update
+  },
+  {
+    path:'/details',
+    name:'details',
+    component:details,
 
   }, {
     path: '/search',
