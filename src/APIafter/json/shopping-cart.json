@@ -1,1 +1,9 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+{"杨洋":[{"shopId":1,"name":"JD自营","joincart":[{"productId":1,"skuId":2,"image":"https://img12.360buyimg.com/n1/jfs/t1/69698/12/16346/72149/5ddf3710Ecfed34e8/50bf5435e73a5ecc.jpg","title":"华为笔记本MateBook X Pro2019 13.9英寸超轻薄笔记本电脑触摸屏设计本商城旗舰正品 深空灰i7-8565U/16G/1T固态/独显 3K触控屏","price":26999,"num":32,"isSelect":false,"item":{"cpu":"15","大小":"1T","颜色":"蓝色"}},{"productId":"1","skuId":1,"title":"华为笔记本MateBook X Pro2019 13.9英寸超轻薄笔记本电脑触摸屏设计本商城旗舰正品 深空灰i7-8565U/16G/1T固态/独显 3K触控屏","price":26999,"num":8,"isSelect":false,"item":{"颜色":"红色","大小":"512G","cpu":"i7"},"image":"https://img12.360buyimg.com/n1/jfs/t1/69698/12/16346/72149/5ddf3710Ecfed34e8/50bf5435e73a5ecc.jpg"}]}]}
+=======
+{"杨洋":[{"shopId":1,"name":"JD自营","joincart":[{"productId":1,"skuId":2,"image":"https://img12.360buyimg.com/n1/jfs/t1/69698/12/16346/72149/5ddf3710Ecfed34e8/50bf5435e73a5ecc.jpg","title":"华为笔记本MateBook X Pro2019 13.9英寸超轻薄笔记本电脑触摸屏设计本商城旗舰正品 深空灰i7-8565U/16G/1T固态/独显 3K触控屏","price":26999,"num":10,"isSelect":false,"item":{"cpu":"15","大小":"1T","颜色":"蓝色"}},{"productId":"1","skuId":1,"title":"华为笔记本MateBook X Pro2019 13.9英寸超轻薄笔记本电脑触摸屏设计本商城旗舰正品 深空灰i7-8565U/16G/1T固态/独显 3K触控屏","price":26999,"num":2,"isSelect":false,"item":{"颜色":"红色","大小":"512G","cpu":"i7"},"image":"https://img12.360buyimg.com/n1/jfs/t1/69698/12/16346/72149/5ddf3710Ecfed34e8/50bf5435e73a5ecc.jpg"}]}]}
+>>>>>>> lmm
+=======
 {"杨洋":[{"shopId":1,"name":"JD自营","joincart":[{"productId":"1","skuId":2,"title":"华为笔记本MateBook X Pro2019 13.9英寸超轻薄笔记本电脑触摸屏设计本商城旗舰正品 深空灰i7-8565U/16G/1T固态/独显 3K触控屏","price":26999,"num":1,"isSelect":false,"item":{"颜色":"蓝色","大小":"1T","cpu":"15"},"image":"https://img12.360buyimg.com/n1/jfs/t1/69698/12/16346/72149/5ddf3710Ecfed34e8/50bf5435e73a5ecc.jpg","initialSku":{"selectedNum":1,"s1":"2","s2":"2","s3":"2"}}],"username":"杨洋"}]}
+>>>>>>> 242f21727825d8de654670a5e0366b20547da7cd
