@@ -298,9 +298,15 @@ app.get('/classfy', function (req, res) {
 
 // 购物车登录态接口
 app.get('/shopcat', function (req, res) {
+    console.log(111)
     if (req.session.userId) {
+        console.log(222)
         res.send({
             code: 0
+        })
+    } else {
+        res.send({
+            code: 1
         })
     }
 })

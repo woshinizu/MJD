@@ -53,7 +53,7 @@ export default {
         return {
             type: 0,
             username: localStorage.getItem('username') || '',
-            shoppingList: [],
+            shoppingList: '',
         }
     },
     computed:{
@@ -76,18 +76,24 @@ export default {
         }
     },
     created(){
-        // getLogin().then(data => {
-        //     console.log(data);
-        // })
-        getCartList(this.username).then(data => {
-            console.log(data);
+        getLogin().then(data => {
+            console.log('1');
             if(data.code == 0){
-                this.shoppingList = data.data;
-                console.log(this.shoppingList);
+                console.log(666);
+                getCartList(this.username).then(data => {
+                    console.log(data);
+                    if(data.code == 0){
+                        this.shoppingList = data.data;
+                        console.log(this.shoppingList);
+                    } else {
+                        Notify({ type: 'danger', message: '请求错误' });
+                    }
+                })
             } else {
-                Notify({ type: 'danger', message: '请求错误' });
+                localStorage.removeItem('username');
             }
         })
+        
     },
     components: {
         'shopping-item': shoppingItem,
