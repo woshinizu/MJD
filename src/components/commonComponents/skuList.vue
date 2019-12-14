@@ -63,6 +63,7 @@ export default {
                 skuInfo={};
             if(this.type == 'buy'){
                 console.log('buy',skuData);
+                this.$emit('changeskuShow')
             } else if(this.type == 'add') {
                 console.log('add',skuData);
                 params.shopId = this.sku.shopId;

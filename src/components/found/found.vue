@@ -18,10 +18,12 @@
 
 
     <div class="footer">
-        <div class="not-concern"> 
-            <img src="../../assets/not-concern.jpg">
+        <div class="not-concern" v-if="isshow"> 
+
+            <van-button type="primary"  class="denglu" @click="changeL">未登录</van-button>
+            <!-- <img src="../../assets/not-concern.jpg" v-else> -->
         </div>
-        <div class="like">
+        <div class="like" v-else>
             <h5 class="lt">猜你喜欢</h5>
             <van-icon name="warning-o" class="rt" @click="add"/>
         </div>
@@ -32,14 +34,23 @@
 <script>
 // @ is an alias to /src
 import recommend from '@/components/found/recommend/recommend.vue'
+import axios from 'axios'
 export default {
     name: 'found',
     data() {
         return {
+            isshow:true,
             ary:[
                 
             ]
         }
+    },
+    created() {
+        axios.get('/found').then(data=>{
+            if(data.data.code==0){
+                this.isshow = false
+            }
+        })
     },
     methods: {
         changeA(e){
@@ -50,6 +61,9 @@ export default {
         },
         concern(){
             this.$router.push('/found/concern')
+        },
+        changeL(){
+            this.$router.push('/login')
         }
     },
     components: {
@@ -120,6 +134,12 @@ export default {
         .van-icon-warning-o{
             line-height:8vw
         }
+    }
+    .denglu{
+        margin: 18vw 36vw;
+        background: red;
+        border: 1px solid red;
+        border-radius: 10px;
     }
     
 }

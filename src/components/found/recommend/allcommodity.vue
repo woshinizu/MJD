@@ -1,11 +1,11 @@
 <template>
     <div>
-        <ul>
-            <li v-for="item in ary">
-                <img :src="item.pic">
+        <ul v-if="shop">
+            <li v-for="item in shop.product" @click="addchange(item.productId)">
+                <img :src="item.goods.picture">
                 <div>
-                    <p>{{item.til}}</p>
-                    <span>{{item.count}}</span>
+                    <p>{{item.goods.title}}</p>
+                    <span>{{item.price}}</span>
                 </div>
             </li>
         </ul>
@@ -14,11 +14,13 @@
 <script>
 // @ is an alias to /src
 
-
+import {getShop} from '@/api/shopping'
 export default {
     name: 'XXX',
     data() {
         return {
+            shopId:this.$route.query.shopId||'',
+            shop:'',
             ary:[
                 {pic:'//img10.360buyimg.com/n7/s350x350_jfs/t1/71754/4/13187/293719/5da5a548Edd67be22/4df6d1bffaa6a86b.jpg!q70.dpg.webp',
                 til:'荣耀路由Pro2 凌霄四核CPU 5G双频双千兆智能高速路由器 四信号大功率放大器 云存储 无线家用穿墙 IPv6',count:'￥299.00'
@@ -37,6 +39,27 @@ export default {
                 count:'￥299.00'
                 }
                 ]
+        }
+    },
+    created() {
+        
+        getShop(this.shopId).then(data=>{
+            if(data.code==0){
+                this.shop = data.data
+                console.log(this.shop)
+            }else{
+                Notify({ type: 'danger', message: '请求错误' })
+            }
+        })
+    },
+    methods: {
+        addchange(productId){
+            this.$router.push({
+                path:'/details',
+                query:{
+                    productId,
+                }
+            })
         }
     },
     components: {

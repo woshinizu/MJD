@@ -97,9 +97,8 @@
       <div>
           <van-goods-action>
             <van-goods-action-icon icon="cart-o" text="购物车" @click="onClickIcon" />
-            <router-link to="/homePage">
-                <van-goods-action-icon icon="shop-o" text="店铺" info="12" />
-            </router-link>
+          
+                <van-goods-action-icon icon="shop-o" text="店铺" info="12" @click="addchange"/>
             <van-goods-action-button type="warning" text="加入购物车" @click="onClickButton" />
             <van-goods-action-button type="danger" text="立即购买" @click="onClickBuyButton" />
             </van-goods-action>
@@ -161,6 +160,12 @@ export default {
         },
         changeShow(){
             this.isShow = !this.isShow
+        },
+        addchange(){
+            this.$router.push({
+                path:'/homePage/head',
+                query:{shopId:this.sku.shopId}
+            })
         }
     },
     components:{

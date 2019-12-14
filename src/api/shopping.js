@@ -27,7 +27,8 @@ export function search(option){
 //加入购物车
 export function addCart(option){
     return http.post('/shopping/addCart',option)
-}
+}  
+
 
 //编辑购物车
 export function editCart(option){
@@ -37,4 +38,14 @@ export function editCart(option){
 //验证登陆
 export function getLogin(){
     return http.get('/shopcat')
+}
+
+export function getShop(shopId){
+    return http.get('/shopping/shop',{
+        params:{shopId}
+    })
+}
+
+export function getallShop(){
+    return http.get('/shopping/allShop')
 }

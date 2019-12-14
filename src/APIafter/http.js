@@ -228,6 +228,15 @@ app.post('/index', function (req, res) {
     }
 })
 
+// 发现接口
+app.get('/found',function(req,res){
+    if(req.session.userId){
+        res.send({
+            code:0
+        })
+    }
+})
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~上面是zdj的接口~~~~~~~~~~~~~~
 
 // 注册接口
 app.post('/sign', function (req, res) {

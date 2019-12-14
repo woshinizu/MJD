@@ -12,7 +12,7 @@ route.get('/proudct', (req, res) => {
         )
         return product
     })
-    let data = shopData.product.find(item => {
+    let data = shopData.product.find(item =>{
         return item.productId = id;
     })
     data.shopId = shopData.shopId,
