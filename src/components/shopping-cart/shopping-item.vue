@@ -6,6 +6,7 @@
                 class="shopName"
                 v-model="allSelect"
                 checked-color="#FD2607"
+                @click.stop="goShop"
             >
                 {{spuInfo.name}}
             </van-checkbox>
@@ -76,6 +77,12 @@ export default {
         },
         changItem(){
             console.log('shop');
+        },
+        goShop(){
+            this.$router.push({
+                path: '/homePage',
+                query: { shopId: this.spuInfo.shopId}
+            })
         }
     },
 }
