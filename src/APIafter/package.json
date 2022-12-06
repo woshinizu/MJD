@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "express-session": "^1.17.0",
-    "qs": "^6.9.1"
+    "qs": "^6.9.7"
   }
 }
